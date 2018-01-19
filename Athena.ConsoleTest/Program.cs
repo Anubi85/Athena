@@ -1,4 +1,5 @@
-﻿using Athena.Commons.LogChannels;
+﻿using Athena.Commons;
+using Athena.Commons.LogChannels;
 using Athena.Logger;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,13 @@ namespace Athena.ConsoleTest
     {
         static void Main(string[] args)
         {
+            InternalLogger ilog = new InternalLogger();
+            ilog.WriteMessage("test msg 1");
+            ilog.WriteMessage("test msg 2");
+            ilog.WriteMessage("test msg 3");
+            ilog.WriteMessage("test msg 4");
+            ilog.WriteMessage("test msg 5");
+            var res = ilog.ReadMessages();
             LogManager.Logger.AddChannel<ConsoleLogChannel>();
             LogManager.Logger.CompleteMessageProcessing = false;
             LogManager.Logger.Start();

@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILogChannel.cs" />
+    <Compile Include="InternalLogger.cs" />
+    <Compile Include="InternalLogMessage.cs" />
     <Compile Include="LogChannels\ConsoleLogChannel.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="LogMessageType.cs" />
