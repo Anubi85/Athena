@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zeus.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Zeus.Data.DataStore">
+            <summary>
+            Data table where records can be accessed by index or by tag.
+            </summary>
+        </member>
+        <member name="T:Zeus.Data.DataStore.Record">
+            <summary>
+            Stores information about a <see cref="N:Zeus.Data"/> record.
+            </summary>
+        </member>
+        <member name="P:Zeus.Data.DataStore.Record.Tag">
+            <summary>
+            Gets the <see cref="T:Zeus.Data.DataStore.Record"/> tag.
+            </summary>
+        </member>
+        <member name="P:Zeus.Data.DataStore.Record.Idx">
+            <summary>
+            Gets the <see cref="T:Zeus.Data.DataStore.Record"/> index.
+            </summary>
+        </member>
+        <member name="P:Zeus.Data.DataStore.Record.Value">
+            <summary>
+            Gets the <see cref="T:Zeus.Data.DataStore.Record"/> value.
+            </summary>
+        </member>
+        <member name="P:Zeus.Data.DataStore.Record.ValueType">
+            <summary>
+            Gets the <see cref="T:System.Type"/> of the <see cref="T:Zeus.Data.DataStore.Record"/> value.
+            </summary>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Record.#ctor(System.String,System.Int32,System.Type,System.Object)">
+            <summary>
+            Initialize a new <see cref="T:Zeus.Data.DataStore.Record"/> instance.
+            </summary>
+            <param name="tag">Record tag.</param>
+            <param name="idx">Record index.</param>
+            <param name="type">Record value <see cref="T:System.Type"/>.</param>
+            <param name="value">Record initial value.</param>
+        </member>
+        <member name="F:Zeus.Data.DataStore.m_RecordList">
+            <summary>
+            List of data table records.
+            </summary>
+        </member>
+        <member name="F:Zeus.Data.DataStore.m_RecordDic">
+            <summary>
+            Dictionary of table records.
+            </summary>
+        </member>
+        <member name="F:Zeus.Data.DataStore.m_FreeIdx">
+            <summary>
+            Queue of the free idx in the <see cref="F:Zeus.Data.DataStore.m_RecordList"/> field.
+            </summary>
+        </member>
+        <member name="F:Zeus.Data.DataStore.m_Lock">
+            <summary>
+            Lock object used to handle concurrent operation.
+            </summary>
+        </member>
+        <member name="M:Zeus.Data.DataStore.#ctor">
+            <summary>
+            Initialize a new instance of <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+        </member>
+        <member name="M:Zeus.Data.DataStore.IsValidIndex(System.Int32)">
+            <summary>
+            Check if the given index is valid or not.
+            </summary>
+            <param name="idx">The index to be checked.</param>
+            <returns>True if the index is valid, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.GetFreeIdx">
+            <summary>
+            Gets the first free idx if any.
+            </summary>
+            <returns>The first avaialble free idx if any, -1 otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Create``1(System.String,``0)">
+            <summary>
+            Create a new record of <typeparamref name="T"/> <see cref="T:System.Type"/> in the data store.
+            </summary>
+            <typeparam name="T">The record <see cref="T:System.Type"/>.</typeparam>
+            <param name="tag">The tag of the record that has to be created.</param>
+            <param name="defaultValue">Default record value.</param>
+            <returns>The index of the new <see cref="T:Zeus.Data.DataStore.Record"/>.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Clear">
+            <summary>
+            Remove all the records from the <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Remove(System.Int32)">
+            <summary>
+            Remove the record at the given index from the <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+            <param name="idx">The index of the record that has to be removed.</param>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Remove(System.String)">
+            <summary>
+            Remove the record with the given tag from the <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+            <param name="tag">The tag of the record that has to be removed.</param>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Set``1(Zeus.Data.DataStore.Record,``0)">
+            <summary>
+            Set the value of an item in the data store.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the new value.</typeparam>
+            <param name="record">The record which that has to be set.</param>
+            <param name="value">The new record value.</param>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Set``1(System.String,``0)">
+            <summary>
+            Set the value of an item in the data store.
+            If the tag does not exists it will be created.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the new value.</typeparam>
+            <param name="tag">The tag that has to be set.</param>
+            <param name="value">The new record value.</param>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Set``1(System.Int32,``0)">
+            <summary>
+            Set the value of an item in the data store.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the new value.</typeparam>
+            <param name="idx">The index that has to be set.</param>
+            <param name="value">The new record value.</param>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Get``1(Zeus.Data.DataStore.Record)">
+            <summary>
+            Get the value of a record in the data store.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the value to be retrieved.</typeparam>
+            <param name="record">The record which value has to be retrieved.</param>
+            <returns>The stored value.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Get``1(System.String)">
+            <summary>
+            Get the value of an item in the data store.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the value to be retrieved.</typeparam>
+            <param name="tag">The tag of the value to be retrieved.</param>
+            <returns>The stored value.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.Get``1(System.Int32)">
+            <summary>
+            Get the value of an item in the data store.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the value to be retrieved.</typeparam>
+            <param name="idx">The index of the value to be retrieved.</param>
+            <returns>The stored value.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.TryGet``1(System.String,``0)">
+            <summary>
+            Try to get the requested value from the data store.
+            If the value is not found or requested type is not compatible the <paramref name="defaultValue"/> value is returned.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the value to be retrieved.</typeparam>
+            <param name="tag">The tag of the value to be retrieved.</param>
+            <param name="defaultValue">The default value returned in case of error.</param>
+            <returns>The stored value if everithing is ok, the <paramref name="defaultValue"/> otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.TryGet``1(System.Int32,``0)">
+            <summary>
+            Try to get the requested value from the data store.
+            If the value is not found or requested type is not compatible the <paramref name="defaultValue"/> value is returned.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type"/> of the value to be retrieved.</typeparam>
+            <param name="idx">The index of the value to be retrieved.</param>
+            <param name="defaultValue">The default value returned in case of error.</param>
+            <returns>The stored value if everithing is ok, the <paramref name="defaultValue"/> otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.GetIdxFromTag(System.String)">
+            <summary>
+            Gets the index of the record with the requested tag.
+            </summary>
+            <param name="tag">The tag of the record wich index has to be retrieved.</param>
+            <returns>The index of the record associated with the requested tag.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.GetTagFromIdx(System.Int32)">
+            <summary>
+            Gets the tag of the record with the requested index.
+            </summary>
+            <param name="idx">The index of the record wich tag has to be retrieved.</param>
+            <returns>The tag of the record associated with the requested index.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.GetTags">
+            <summary>
+            Gets all the avaialble tags of the <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of all the avaialble tags.</returns>
+        </member>
+        <member name="M:Zeus.Data.DataStore.GetIdxs">
+            <summary>
+            Gets all the avaialble index of the <see cref="T:Zeus.Data.DataStore"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of all the available indexes.</returns>
+        </member>
+    </members>
+</doc>

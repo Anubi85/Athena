@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.Logger", "Athena.LogManager\Athena.Logger.csproj", "{146E6B98-B4B6-47EA-B4D4-440F8755C0D8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena", "Athena\Athena.csproj", "{780F3F3A-6C8B-4823-B144-0C5AD6AC9448}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.LogServer", "Athena.LogServer\Athena.LogServer.csproj", "{7D71EEE7-4F6A-4352-A8BC-70131062C43F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.Commons", "Athena.Commons\Athena.Commons.csproj", "{7441ED11-AD79-4992-9F00-2522351F2CF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.Wcf", "Athena.Wcf\Athena.Wcf.csproj", "{D17A781A-EAFC-4D25-90A6-B034144C4A9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.ConsoleTest", "Athena.ConsoleTest\Athena.ConsoleTest.csproj", "{E166FCD1-E395-4A4D-B807-CA14B0312A87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena.LogChannel", "Athena.LogChannel\Athena.LogChannel.csproj", "{31CAE887-3178-429C-9F51-46A8FDE1D2B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{146E6B98-B4B6-47EA-B4D4-440F8755C0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{146E6B98-B4B6-47EA-B4D4-440F8755C0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{146E6B98-B4B6-47EA-B4D4-440F8755C0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{146E6B98-B4B6-47EA-B4D4-440F8755C0D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{780F3F3A-6C8B-4823-B144-0C5AD6AC9448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{780F3F3A-6C8B-4823-B144-0C5AD6AC9448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{780F3F3A-6C8B-4823-B144-0C5AD6AC9448}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,14 +25,14 @@ Global
 		{7D71EEE7-4F6A-4352-A8BC-70131062C43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D71EEE7-4F6A-4352-A8BC-70131062C43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D71EEE7-4F6A-4352-A8BC-70131062C43F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7441ED11-AD79-4992-9F00-2522351F2CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7441ED11-AD79-4992-9F00-2522351F2CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7441ED11-AD79-4992-9F00-2522351F2CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7441ED11-AD79-4992-9F00-2522351F2CF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E166FCD1-E395-4A4D-B807-CA14B0312A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E166FCD1-E395-4A4D-B807-CA14B0312A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E166FCD1-E395-4A4D-B807-CA14B0312A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E166FCD1-E395-4A4D-B807-CA14B0312A87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17A781A-EAFC-4D25-90A6-B034144C4A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17A781A-EAFC-4D25-90A6-B034144C4A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17A781A-EAFC-4D25-90A6-B034144C4A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17A781A-EAFC-4D25-90A6-B034144C4A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CAE887-3178-429C-9F51-46A8FDE1D2B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CAE887-3178-429C-9F51-46A8FDE1D2B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CAE887-3178-429C-9F51-46A8FDE1D2B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CAE887-3178-429C-9F51-46A8FDE1D2B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

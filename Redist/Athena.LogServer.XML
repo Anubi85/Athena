@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Athena.LogServer</name>
+    </assembly>
+    <members>
+        <member name="T:Athena.LogServer.LogServer">
+            <summary>
+            Implements the windows service that hosts the Athena Log Server WCF service.
+            </summary>
+        </member>
+        <member name="F:Athena.LogServer.LogServer.m_WcfHost">
+            <summary>
+            The Athena WCF service log server host.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.LogServer.#ctor">
+            <summary>
+            Initialize the class.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.LogServer.OnStart(System.String[])">
+            <summary>
+            Initialize the service resources and starts the Athena WCF log server host.
+            </summary>
+            <param name="args">The arguments passed to the service.</param>
+        </member>
+        <member name="M:Athena.LogServer.LogServer.OnStop">
+            <summary>
+            Clean up the resources used by the Athena WCF log server service.
+            </summary>
+        </member>
+        <member name="F:Athena.LogServer.LogServer.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.LogServer.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Athena.LogServer.LogServer.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Athena.LogServer.Program.ServiceName">
+            <summary>
+            The one and only service name.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.Program.InstallService">
+            <summary>
+            Performs the service installation.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.Program.UnistallService">
+            <summary>
+            Perform the service uninstallation.
+            </summary>
+        </member>
+        <member name="F:Athena.LogServer.LogServerInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Athena.LogServer.LogServerInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Athena.LogServer.LogServerInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,34 @@
+﻿Installing assembly 'c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.InstallLog
+   assemblypath = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe
+Installing service Athena.LogServer...
+Service Athena.LogServer has been successfully installed.
+Creating EventLog source Athena.LogServer in log Application...
+Committing assembly 'c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.InstallLog
+   assemblypath = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe
+Uninstalling assembly 'c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.InstallLog
+   assemblypath = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe
+Removing EventLog source Athena.LogServer.
+Service Athena.LogServer is being removed from the system...
+Service Athena.LogServer was successfully removed from the system.
+Installing assembly 'c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.InstallLog
+   assemblypath = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe
+Installing service Athena.LogServer...
+Service Athena.LogServer has been successfully installed.
+Creating EventLog source Athena.LogServer in log Application...
+Committing assembly 'c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.InstallLog
+   assemblypath = c:\users-data\sma4010\Documents\Visual Studio 2015\Projects\Athena\Redist\Athena.LogServer.exe

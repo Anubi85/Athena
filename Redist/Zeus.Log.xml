@@ -1,0 +1,480 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zeus.Log</name>
+    </assembly>
+    <members>
+        <member name="T:Zeus.Log.Channels.ConsoleChannel">
+            <summary>
+            Logs a message to the console.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.ConsoleChannel.WriteMessage(Zeus.Log.LogMessage)">
+            <summary>
+            Writes a new message on the console.
+            </summary>
+            <param name="msg">The message that has to be processed.</param>
+        </member>
+        <member name="F:Zeus.Log.Channels.ConsoleChannel.c_MsgFormat">
+            <summary>
+            Format string for messages logged by this channel.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.Channels.FileChannel">
+            <summary>
+            Logs message to file.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.Initialize(Zeus.Data.DataStore)">
+            <summary>
+            Initializes the log channel.
+            </summary>
+            <param name="settings">The object that contains channel settings.</param>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.WriteMessage(Zeus.Log.LogMessage)">
+            <summary>
+            Writes a new message on the console.
+            </summary>
+            <param name="msg">The message that has to be processed.</param>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.Dispose">
+            <summary>
+            Releases unmanaged resources.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.c_MsgFormat">
+            <summary>
+            Format string for messages logged by this channel.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.c_CreateAnywayKey">
+            <summary>
+            The settings key for the Create Anyway option.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.c_FileNameKey">
+            <summary>
+            The settings key for the file name.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.c_MaxFileSizeKey">
+            <summary>
+            The settings key for the maximum file size.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.c_FormatKeys">
+            <summary>
+            The dictionary that contains format keys mapping.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.m_LogFile">
+            <summary>
+            The log file stream.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.m_FileNameTemplate">
+            <summary>
+            The log file name template.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.m_FileCounter">
+            <summary>
+            A counter that keep trace about how much log files has been created.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.m_MsgCounter">
+            <summary>
+            A counter that keep trace about how much message has been logged.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.FileChannel.m_MaxFileSize">
+            <summary>
+            The maximum log file size in bytes.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.#ctor">
+            <summary>
+            Initialize class internal fields.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.GetLogFile">
+            <summary>
+            Gets the log file writer.
+            </summary>
+            <returns>The <see cref="T:System.IO.StreamWriter"/> that allows to wite logs to file.</returns>
+        </member>
+        <member name="M:Zeus.Log.Channels.FileChannel.CloseLogFile">
+            <summary>
+            Closes the log file.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.Channels.ILogChannel">
+            <summary>
+            Represent a generic log channel.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.ILogChannel.Initialize(Zeus.Data.DataStore)">
+            <summary>
+            Initializes the log channel.
+            </summary>
+            <param name="settings">The object that contains channel settings.</param>
+        </member>
+        <member name="M:Zeus.Log.Channels.ILogChannel.WriteMessage(Zeus.Log.LogMessage)">
+            <summary>
+            Writes a new message on the log channel.
+            </summary>
+            <param name="msg">The message that has to be processed.</param>
+        </member>
+        <member name="P:Zeus.Log.Channels.ILogChannel.MinimumLogLevel">
+            <summary>
+            Gets the minimum log level for the log channel.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.Channels.ILogChannel.MaximumLogLevel">
+            <summary>
+            Gets the maximum log level for the log channel.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.Channels.ILogChannelMetaData">
+            <summary>
+            Defines the metadata that can be associated to a log channel.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.Channels.ILogChannelMetaData.Name">
+            <summary>
+            Gets the log channel name.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.Channels.LogChannelBase">
+            <summary>
+            Provides a basic implementation of the <see cref="T:Zeus.Log.Channels.ILogChannel"/> interface with common functionalities.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.LogChannelBase.c_MinLvlAttributeName">
+            <summary>
+            The name of the attribute that contains information about the channel minimum log level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.LogChannelBase.c_MaxLvlAttributeName">
+            <summary>
+            The name of the attribute that contains inforamtion about the channel maximus log level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.Channels.LogChannelBase.c_FormatAttributeName">
+            <summary>
+            The name of the attribute that contains information about the channel message format.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.Channels.LogChannelBase.MaximumLogLevel">
+            <summary>
+            Gets the maximum log level for the log channel.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.Channels.LogChannelBase.MinimumLogLevel">
+            <summary>
+            Gets the minimum log level for the log channel.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.LogChannelBase.Initialize(Zeus.Data.DataStore)">
+            <summary>
+            Initializes the log channel.
+            </summary>
+            <param name="settings">The object that contains channel settings.</param>
+        </member>
+        <member name="M:Zeus.Log.Channels.LogChannelBase.WriteMessage(Zeus.Log.LogMessage)">
+            <summary>
+            Writes a new message on the console.
+            </summary>
+            <param name="msg">The message that has to be processed.</param>
+        </member>
+        <member name="M:Zeus.Log.Channels.LogChannelBase.Dispose">
+            <summary>
+            Releases unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.Channels.LogChannelBase.MessageFormat">
+            <summary>
+            Gets the message format if configured.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.Channels.LogChannelBase.#ctor">
+            <summary>
+            Initialize default values.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.LogLevels">
+            <summary>
+            This enum define all the available log levels.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Trace">
+            <summary>
+            Trace level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Debug">
+            <summary>
+            Debug level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Info">
+            <summary>
+            Information level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Success">
+            <summary>
+            Success level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Warning">
+            <summary>
+            Warning level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Error">
+            <summary>
+            Non fatal error level.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogLevels.Fatal">
+            <summary>
+            Fatal error level.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.LogManager">
+            <summary>
+            Manages the message logging of the application.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.#cctor">
+            <summary>
+            Instantiate a new instance and allocate and initialize class resources.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.OnExit(System.Object,System.EventArgs)">
+            <summary>
+            Method called when the application exits. Clean up resources.
+            </summary>
+            <param name="sender">The object that generate the event.</param>
+            <param name="e">The arguments that contains information about the event.</param>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_LogChannels">
+            <summary>
+            The list of channels used by the log manager to log messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_MessageQuque">
+            <summary>
+            The queue that contains the message to be processed by each configured channel.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_Cancel">
+            <summary>
+            The cancellation token used to stop worker thread.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_WorkerThread">
+            <summary>
+            The <see cref="T:System.Threading.Thread"/> that actually process the log messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_ProcessName">
+            <summary>
+            The name of the process that instantiate the class.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.s_InternalLogger">
+            <summary>
+            The log channel used to log internal error messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogManager.c_DefaultMethodName">
+            <summary>
+            The default value of the methodName parameters used in the Write*TYPE*Message methods.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteMessage(Zeus.Log.LogLevels,System.String,System.String)">
+            <summary>
+            Apend a new message to the message queue.
+            </summary>
+            <param name="level">The type of the message.</param>
+            <param name="methodName">The name of the method that generate the message.</param>
+            <param name="text">The message text.</param>        
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteTraceMessage(System.String,System.String)">
+            <summary>
+            Append a trace message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteDebugMessage(System.String,System.String)">
+            <summary>
+            Append a debug message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteInfoMessage(System.String,System.String)">
+            <summary>
+            Append an info message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteSuccessMessage(System.String,System.String)">
+            <summary>
+            Append a success message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteWarningMessage(System.String,System.String)">
+            <summary>
+            Append a warning message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteErrorMessage(System.String,System.String)">
+            <summary>
+            Append an error message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.WriteFatalMessage(System.String,System.String)">
+            <summary>
+            Append a fatal error message to the message queue.
+            </summary>
+            <param name="text">The message text.</param>
+            <param name="methodName">The name of the method that generate the message (automatically retrieved).</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.DoWork">
+            <summary>
+            This method read a message from the message queue and pass it to all the configured channels in order to be processed.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.Start">
+            <summary>
+            Enable the message processing of the logger.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.Stop">
+            <summary>
+            Disable the message processing.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogManager.IsSingleInstanceChannel``1">
+            <summary>
+            Checks if the specified type allow multiple instances.
+            </summary>
+            <typeparam name="T">The type of the <see cref="T:Zeus.Log.Channels.ILogChannel"/> that has to be tested for allowing multiple instances.</typeparam>
+            <returns>True if multiple instances are allowed, otherwise false.</returns>
+        </member>
+        <member name="M:Zeus.Log.LogManager.AddChannel``1(Zeus.Data.DataStore)">
+            <summary>
+            Adds a new log channel to the <see cref="T:Zeus.Log.LogManager"/>.
+            </summary>
+            <typeparam name="T">The type of the channel that has to be added.</typeparam>
+            <param name="settings">The channel settings.</param>
+            <returns>True if succeed, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Log.LogManager.LogInternally(System.String,System.String)">
+            <summary>
+            Logs a message to the internal logger
+            </summary>
+            <param name="text">The message to log.</param>
+        </member>
+        <member name="M:Zeus.Log.LogManager.CanProcess(Zeus.Log.Channels.ILogChannel,Zeus.Log.LogLevels)">
+            <summary>
+            Check if the channel can process the incoming message.
+            </summary>
+            <param name="level">The <see cref="T:Zeus.Log.LogLevels"/> of the incoming message.</param>
+            <returns>True if the incoming message level is in the range that the channel should process, false otherwise.</returns>
+        </member>
+        <member name="P:Zeus.Log.LogManager.CompleteMessageProcessing">
+            <summary>
+            Gets or set a flag that tell to the object if it has to complete the message processing or discard unprocessed messaged when it will be destroyed.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.LogMessage">
+            <summary>
+            Contains the unformatted data of a log message.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogMessage.#ctor(Zeus.Log.LogLevels,System.String,System.String,System.String)">
+            <summary>
+            Instantiate a new <see cref="T:Zeus.Log.LogMessage"/> object and initialize its properties.
+            </summary>
+            <param name="level">The type of the message.</param>
+            <param name="methodName">The name of the method that originate the message.</param>
+            <param name="processName">The name of the process that originate the message.</param>
+            <param name="text">The text of the message.</param>
+        </member>
+        <member name="P:Zeus.Log.LogMessage.Time">
+            <summary>
+            Gets the time at wich the <see cref="T:Zeus.Log.LogMessage"/> object has been created.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.LogMessage.Level">
+            <summary>
+            Gets the type of the message.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.LogMessage.MethodName">
+            <summary>
+            Gets the name of the method that generate the message.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.LogMessage.ProcessName">
+            <summary>
+            Gets the name of the process that generate the message.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.LogMessage.Text">
+            <summary>
+            Gets the message text.
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogMessage.c_FormatKeys">
+            <summary>
+            The dictionary that contains format keys mapping.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogMessage.ApplyFormat(System.String)">
+            <summary>
+            Format the message with the given string format.
+            </summary>
+            <param name="format">String format for the message.</param>
+            <returns>Message data formatted according wih given format string.</returns>
+        </member>
+        <member name="T:Zeus.Log.LogSettings">
+            <summary>
+            Contains the settings of the application logger.
+            The name of the Xml configration file node associated with this class is "log".
+            </summary>
+        </member>
+        <member name="F:Zeus.Log.LogSettings.m_ChannelSettings">
+            <summary>
+            List of objects that contains configuration information for log channels.
+            </summary>
+        </member>
+        <member name="M:Zeus.Log.LogSettings.#ctor">
+            <summary>
+            Initializes internal class fields.
+            </summary>
+        </member>
+        <member name="P:Zeus.Log.LogSettings.ChannelSettings">
+            <summary>
+            Gets a list of objects that contains channels configuration information.
+            </summary>
+        </member>
+        <member name="T:Zeus.Log.AllowMultipleInstancesAttribute">
+            <summary>
+            Defines an attribute the allow to create multiple instances of the same <see cref="T:Zeus.Log.Channels.ILogChannel"/>.
+            </summary>
+        </member>
+    </members>
+</doc>
