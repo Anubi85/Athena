@@ -49,6 +49,16 @@
                     <TextBlock Text="{Binding ServerName}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <DataGrid
+                        ItemsSource="{Binding LogMessages}"
+                        ColumnWidth="*"
+                        CanUserReorderColumns="False"
+                        CanUserAddRows="False"
+                        HeadersVisibility="Column"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
         <StatusBar Grid.Row="2">
             <StatusBarItem Content="{Binding StatusLabel}" HorizontalAlignment="Right" />

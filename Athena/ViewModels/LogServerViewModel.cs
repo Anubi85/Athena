@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.ObjectModel;
+using System.Net;
 using Zeus.UI.Mvvm;
 
 namespace Athena.ViewModels
@@ -14,6 +15,18 @@ namespace Athena.ViewModels
         /// The IP address of the Athena log server associated with this view model.
         /// </summary>
         private IPAddress m_ServerAddress;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Initialize view model fields.
+        /// </summary>
+        public LogServerViewModel()
+        {
+            LogMessages = new ObservableCollection<LogMessageViewModel>();
+        }
 
         #endregion
 
@@ -34,7 +47,9 @@ namespace Athena.ViewModels
         /// Interrogate the server in order to download new messages if any.
         /// </summary>
         public void Update()
-        { }
+        {
+            LogMessages.Add(new LogMessageViewModel());
+        }
 
         #endregion
 
@@ -47,6 +62,10 @@ namespace Athena.ViewModels
         {
             get { return m_ServerAddress?.ToString(); }
         }
+        /// <summary>
+        /// Gets the collection of the avaialble log messages.
+        /// </summary>
+        public ObservableCollection<LogMessageViewModel> LogMessages { get; private set; }
 
         #endregion
     }

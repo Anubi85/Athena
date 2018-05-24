@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Zeus.UI;component/Themes/Zeus.Dark.xaml" />
+                <ResourceDictionary Source="/Zeus.UI;component/Themes/Zeus.Light.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

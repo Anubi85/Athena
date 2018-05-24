@@ -2,9 +2,9 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Net;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Zeus.UI.Mvvm;
 using Zeus.UI.Mvvm.Interfaces;
 
@@ -24,7 +24,7 @@ namespace Athena.ViewModels
         /// <summary>
         /// The timer used to polling the Athena log servers.
         /// </summary>
-        private Timer m_UpdateTimer;
+        private DispatcherTimer m_UpdateTimer;
 
         #endregion
 
@@ -103,8 +103,9 @@ namespace Athena.ViewModels
         /// <summary>
         /// Updates the Athena log servers data.
         /// </summary>
-        /// <param name="state">An object used for syncronization purposes.</param>
-        private void UpdateServersCallback(object state)
+        /// <param name="sender">The object that generates the event.</param>
+        /// <param name="e">An object that contains information about the occurred event.</param>
+        private void UpdateServersCallback(object sender, EventArgs e)
         {
             foreach(LogServerViewModel serverVM in Servers)
             {
@@ -128,7 +129,7 @@ namespace Athena.ViewModels
             PauseResumeCommand = new RelayCommand(PauseResume);
             ConnectToServerCommand = new RelayCommand(ConnectToServer);
             Servers = new ObservableCollection<LogServerViewModel>();
-            m_UpdateTimer = new Timer(UpdateServersCallback, null, new TimeSpan(), new TimeSpan(5000000));//perform an update every 500 ms
+            m_UpdateTimer = new DispatcherTimer(new TimeSpan(5000000), DispatcherPriority.Normal, UpdateServersCallback, Dispatcher.CurrentDispatcher);//perform an update every 500 ms
         }
 
         #endregion
