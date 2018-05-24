@@ -6,12 +6,48 @@
         xmlns:local="clr-namespace:Athena.Views"
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
+        xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI"
         mc:Ignorable="d"
         Title="ConnectionView"
-        Height="300"
         Width="300"
-        ShowCloseButton="True">
+        ShowCloseButton="True"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+    <zc:ZeusDialog.DataContext>
+        <vm:ConnectionViewModel />
+    </zc:ZeusDialog.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Content="Athena Log Server Address" />
+        <TextBox
+            Grid.Row="1"
+            Margin="0,0,0,5">
+            <TextBox.Text>
+                <Binding
+                    Path="AthenaServerAddress"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:IPTextValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <zc:ZeusButton
+            Color="Blue"
+            IsBordered="True"
+            Grid.Row="2"
+            Content="OK"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Padding="15,1"
+            VerticalContentAlignment="Center"
+            IsDefault="True"
+            Command="{Binding CloseTrueCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusDialog}}}"/>
     </Grid>
 </zc:ZeusDialog>

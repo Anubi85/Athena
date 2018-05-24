@@ -12,7 +12,8 @@
         Width="525"
         ShowCloseButton="True"
         ShowMinimizeButton="True"
-        ShowMaximizeButton="True">
+        ShowMaximizeButton="True"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -27,18 +28,28 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Connect" Command="{Binding ConnectToServerCommand}" />
+                <MenuItem Header="Connect" Command="{Binding ConnectToServerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}" />
             </MenuItem>
             <MenuItem Header="Edit">
                 <MenuItem Header="Clear" />
                 <MenuItem Header="Pause" Visibility="{Binding PauseMenuVisibility}" Command="{Binding PauseResumeCommand}" />
                 <MenuItem Header="Resume" Visibility="{Binding ContinueMenuVisibility}" Command="{Binding PauseResumeCommand}" />
-                <MenuItem Header="Auto Scroll" IsChecked="{Binding Options.AutoScroll}" IsCheckable="True" />
+                <MenuItem Header="Auto Scroll" IsChecked="{Binding AutoScroll}" IsCheckable="True" />
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem Header="Filters" />
             </MenuItem>
         </Menu>
+        <TabControl
+            Grid.Row="1"
+            ItemsSource="{Binding Servers}"
+            TabStripPlacement="Top">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ServerName}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
         <StatusBar Grid.Row="2">
             <StatusBarItem Content="{Binding StatusLabel}" HorizontalAlignment="Right" />
         </StatusBar>

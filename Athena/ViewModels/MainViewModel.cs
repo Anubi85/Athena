@@ -1,4 +1,8 @@
 ﻿using Athena.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using Zeus.UI.Mvvm;
@@ -11,32 +15,49 @@ namespace Athena.ViewModels
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        #region Properties
+        #region Fields
 
         /// <summary>
-        /// Gets the <see cref="OptionsModel"/> object.
+        /// The model used by the main view.
         /// </summary>
-        public OptionsModel Options { get; private set; }
+        private OptionsModel m_Options;
+        /// <summary>
+        /// The timer used to polling the Athena log servers.
+        /// </summary>
+        private Timer m_UpdateTimer;
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// Gets the visibility of the Pause menu.
         /// </summary>
         public Visibility PauseMenuVisibility
         {
-            get { return Options.IsPaused ? Visibility.Collapsed : Visibility.Visible; }
+            get { return m_Options.IsPaused ? Visibility.Collapsed : Visibility.Visible; }
         }
         /// <summary>
         /// Gets the visibility of the Continue menu.
         /// </summary>
         public Visibility ContinueMenuVisibility
         {
-            get { return Options.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
+            get { return m_Options.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
         }
         /// <summary>
         /// Gets the string that will be shown in the status bar and that represent the current application ststus.
         /// </summary>
         public string StatusLabel
         {
-            get { return Options.IsPaused ? "Paused" : "Online"; }
+            get { return m_Options.IsPaused ? "Paused" : "Online"; }
+        }
+        /// <summary>
+        /// Gets or sets a flag that indicates if the autoscroll is enabled.
+        /// </summary>
+        public bool AutoScroll
+        {
+            get { return m_Options.AutoScroll; }
+            set { m_Options.AutoScroll = value; }
         }
         /// <summary>
         /// Gets the command that handle the Pause/Resume events.
@@ -46,6 +67,10 @@ namespace Athena.ViewModels
         /// Gets the command that handles the connection to a server.
         /// </summary>
         public ICommand ConnectToServerCommand { get; private set; }
+        /// <summary>
+        /// Gets the avaialble Athena log servers.
+        /// </summary>
+        public ObservableCollection<LogServerViewModel> Servers { get; private set; }
 
         #endregion
 
@@ -56,14 +81,35 @@ namespace Athena.ViewModels
         /// </summary>
         private void PauseResume()
         {
-            Options.IsPaused = !Options.IsPaused;
+            m_Options.IsPaused = !m_Options.IsPaused;
         }
         /// <summary>
         /// Connects to a server to retrieve messages.
         /// </summary>
-        private void ConnectToServer()
+        /// <param name="owner">The owner window.</param>
+        private void ConnectToServer(object owner)
         {
-            ServiceLocator.Resolve<IDialogService>().ShowDialog(new ConnectionViewModel());
+            ConnectionViewModel vm = new ConnectionViewModel();
+            bool? result = ServiceLocator.Resolve<IDialogService>().ShowModalDialog(vm, owner as Window);
+            if (result.HasValue && result.Value && !string.IsNullOrEmpty(vm.AthenaServerAddress))
+            {
+                LogServerViewModel serverVM = new LogServerViewModel();
+                if (serverVM.Connect(IPAddress.Parse(vm.AthenaServerAddress)))
+                {
+                    Servers.Add(serverVM);
+                }
+            }
+        }
+        /// <summary>
+        /// Updates the Athena log servers data.
+        /// </summary>
+        /// <param name="state">An object used for syncronization purposes.</param>
+        private void UpdateServersCallback(object state)
+        {
+            foreach(LogServerViewModel serverVM in Servers)
+            {
+                serverVM.Update();
+            }
         }
 
         #endregion
@@ -75,12 +121,14 @@ namespace Athena.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            Options = new OptionsModel();
-            RegisterPropagation(Options, () => Options.IsPaused, () => PauseMenuVisibility);
-            RegisterPropagation(Options, () => Options.IsPaused, () => ContinueMenuVisibility);
-            RegisterPropagation(Options, () => Options.IsPaused, () => StatusLabel);
+            m_Options = new OptionsModel();
+            RegisterPropagation(m_Options, () => m_Options.IsPaused, () => PauseMenuVisibility);
+            RegisterPropagation(m_Options, () => m_Options.IsPaused, () => ContinueMenuVisibility);
+            RegisterPropagation(m_Options, () => m_Options.IsPaused, () => StatusLabel);
             PauseResumeCommand = new RelayCommand(PauseResume);
             ConnectToServerCommand = new RelayCommand(ConnectToServer);
+            Servers = new ObservableCollection<LogServerViewModel>();
+            m_UpdateTimer = new Timer(UpdateServersCallback, null, new TimeSpan(), new TimeSpan(5000000));//perform an update every 500 ms
         }
 
         #endregion
