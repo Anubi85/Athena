@@ -14,44 +14,44 @@
         ShowMinimizeButton="True"
         ShowMaximizeButton="True"
         WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
+    <zc:ZeusWindow.DataContext>
         <vm:AthenaViewModel />
-    </Window.DataContext>
-    <Window.Icon>
+    </zc:ZeusWindow.DataContext>
+    <zc:ZeusWindow.Icon>
         <BitmapImage UriSource="/Athena;component/Resources/Athena.ico" />
-    </Window.Icon>
+    </zc:ZeusWindow.Icon>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
-            <MenuItem Header="File">
-                <MenuItem Header="Connect" Command="{Binding ConnectToServerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}" />
-            </MenuItem>
-            <MenuItem Header="Edit">
-                <MenuItem Header="Clear" />
-                <MenuItem Header="Pause" Visibility="{Binding PauseMenuVisibility}" Command="{Binding PauseResumeCommand}" />
-                <MenuItem Header="Resume" Visibility="{Binding ContinueMenuVisibility}" Command="{Binding PauseResumeCommand}" />
-                <MenuItem Header="Auto Scroll" IsChecked="{Binding AutoScroll}" IsCheckable="True" />
-            </MenuItem>
-            <MenuItem Header="Tools">
-                <MenuItem Header="Filters" />
-            </MenuItem>
-        </Menu>
-        <TabControl
+        <zc:ZeusMenu Grid.Row="0">
+            <zc:ZeusMenuItem Header="File">
+                <zc:ZeusMenuItem Header="Connect" Command="{Binding ConnectToServerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}" />
+            </zc:ZeusMenuItem>
+            <zc:ZeusMenuItem Header="Edit">
+                <zc:ZeusMenuItem Header="Clear" />
+                <zc:ZeusMenuItem Header="Pause" Visibility="{Binding PauseMenuVisibility}" Command="{Binding PauseResumeCommand}" />
+                <zc:ZeusMenuItem Header="Resume" Visibility="{Binding ContinueMenuVisibility}" Command="{Binding PauseResumeCommand}" />
+                <zc:ZeusMenuItem Header="Auto Scroll" IsChecked="{Binding AutoScroll}" IsCheckable="True" />
+            </zc:ZeusMenuItem>
+            <zc:ZeusMenuItem Header="Tools">
+                <zc:ZeusMenuItem Header="Filters" />
+            </zc:ZeusMenuItem>
+        </zc:ZeusMenu>
+        <zc:ZeusTabControl
             Grid.Row="1"
             ItemsSource="{Binding Servers}"
             TabStripPlacement="Top">
-            <TabControl.ItemTemplate>
+            <zc:ZeusTabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding ServerName}" />
                 </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
+            </zc:ZeusTabControl.ItemTemplate>
+            <zc:ZeusTabControl.ContentTemplate>
                 <DataTemplate>
-                    <DataGrid
+                    <zc:ZeusDataGrid
                         ItemsSource="{Binding LogMessages}"
                         AutoGenerateColumns="False"
                         CanUserReorderColumns="False"
@@ -59,20 +59,21 @@
                         CanUserDeleteRows="False"
                         CanUserResizeRows="False"
                         CanUserAddRows="False"
+                        IsReadOnly="True"
                         HeadersVisibility="Column">
-                        <DataGrid.Columns>
+                        <zc:ZeusDataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding Level}" Header="Level" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding ProcessName}" Header="Process" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding MethodName}" Header="Method" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding Text}" Header="Message" Width="*" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        </zc:ZeusDataGrid.Columns>
+                    </zc:ZeusDataGrid>
                 </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
-        <StatusBar Grid.Row="2">
-            <StatusBarItem Content="{Binding StatusLabel}" HorizontalAlignment="Right" />
-        </StatusBar>
+            </zc:ZeusTabControl.ContentTemplate>
+        </zc:ZeusTabControl>
+        <zc:ZeusStatusBar Grid.Row="2">
+            <zc:ZeusStatusBarItem Content="{Binding StatusLabel}" HorizontalAlignment="Right" />
+        </zc:ZeusStatusBar>
     </Grid>
 </zc:ZeusWindow>

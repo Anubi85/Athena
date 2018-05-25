@@ -9,9 +9,10 @@
         xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI"
         mc:Ignorable="d"
         Title="ConnectionView"
-        Width="300"
         ShowCloseButton="True"
-        SizeToContent="Height"
+        Width="Auto"
+        Height="Auto"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner">
     <zc:ZeusDialog.DataContext>
         <vm:ConnectionViewModel />
@@ -22,13 +23,13 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <Label
+        <zc:ZeusLabel
             Grid.Row="0"
             Content="Athena Log Server Address" />
-        <TextBox
+        <zc:ZeusTextBox
             Grid.Row="1"
             Margin="0,0,0,5">
-            <TextBox.Text>
+            <zc:ZeusTextBox.Text>
                 <Binding
                     Path="AthenaServerAddress"
                     UpdateSourceTrigger="PropertyChanged">
@@ -36,8 +37,8 @@
                         <vr:IPTextValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
-            </TextBox.Text>
-        </TextBox>
+            </zc:ZeusTextBox.Text>
+        </zc:ZeusTextBox>
         <zc:ZeusButton
             Color="Blue"
             IsBordered="True"
