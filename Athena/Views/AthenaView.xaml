@@ -15,7 +15,7 @@
         ShowMaximizeButton="True"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:MainViewModel />
+        <vm:AthenaViewModel />
     </Window.DataContext>
     <Window.Icon>
         <BitmapImage UriSource="/Athena;component/Resources/Athena.ico" />
@@ -54,7 +54,10 @@
                     <DataGrid
                         ItemsSource="{Binding LogMessages}"
                         ColumnWidth="*"
-                        CanUserReorderColumns="False"
+                        CanUserReorderColumns="True"
+                        CanUserSortColumns="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeRows="False"
                         CanUserAddRows="False"
                         HeadersVisibility="Column"/>
                 </DataTemplate>

@@ -64,7 +64,7 @@ namespace Athena.Wcf
             {
                 if (startDate.HasValue)
                 {
-                    return s_MessageBuffer.Where(msg => msg.Time >= startDate.Value).ToList();
+                    return s_MessageBuffer.Where(msg => msg.Time > startDate.Value).ToList();
                 }
                 else
                 {

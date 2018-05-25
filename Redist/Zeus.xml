@@ -235,6 +235,16 @@
             The requested repository class was not found error.
             </summary>
         </member>
+        <member name="F:Zeus.ErrorCodes.RegistrationAlreadyExists">
+            <summary>
+            The registration already exists error.
+            </summary>
+        </member>
+        <member name="F:Zeus.ErrorCodes.RegistrationDoNotExists">
+            <summary>
+            The registration do not exist error.
+            </summary>
+        </member>
         <member name="T:Zeus.Exceptions.ZeusException">
             <summary>
             Generic exception class for Zeus framework.

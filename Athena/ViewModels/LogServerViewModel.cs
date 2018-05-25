@@ -1,5 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Net;
+﻿using Athena.Models;
+using Athena.Wcf;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Data;
 using Zeus.UI.Mvvm;
 
 namespace Athena.ViewModels
@@ -7,14 +11,18 @@ namespace Athena.ViewModels
     /// <summary>
     /// The view model used for data bingind in server logged messages view.
     /// </summary>
-    public class LogServerViewModel : ViewModelBase
+    class LogServerViewModel : ViewModelBase
     {
         #region Fields
 
         /// <summary>
-        /// The IP address of the Athena log server associated with this view model.
+        /// The model associated with this view model instance.
         /// </summary>
-        private IPAddress m_ServerAddress;
+        private LogServerModel m_Model;
+        /// <summary>
+        /// Syncronization object used to syncronize collection access.
+        /// </summary>
+        private object m_SyncObject;
 
         #endregion
 
@@ -23,9 +31,15 @@ namespace Athena.ViewModels
         /// <summary>
         /// Initialize view model fields.
         /// </summary>
-        public LogServerViewModel()
+        /// <param name="model">The <see cref="LogServerModel"/> object that allows to interact with the Athena server.</param>
+        public LogServerViewModel(LogServerModel model)
         {
-            LogMessages = new ObservableCollection<LogMessageViewModel>();
+            m_Model = model;
+            m_Model.NewMessagesAvaialble += ProcessNewMessages;
+            RegisterPropagation(m_Model, () => m_Model.IsConnected, () => IcConnected);
+            m_SyncObject = new object();
+            LogMessages = new ObservableCollection<WcfLogMessage>();
+            BindingOperations.EnableCollectionSynchronization(LogMessages, m_SyncObject);
         }
 
         #endregion
@@ -33,22 +47,18 @@ namespace Athena.ViewModels
         #region Methods
 
         /// <summary>
-        /// Connect to the server specified in <paramref name="address"/> parameter.
+        /// Process the new messages received from the server.
         /// </summary>
-        /// <param name="address">The IP address of the Athena log server.</param>
-        /// <returns>Return true if the connection succeed, false otherwise.</returns>
-        public bool Connect(IPAddress address)
+        /// <param name="messages">The list of the new messages received.</param>
+        private void ProcessNewMessages(List<WcfLogMessage> messages)
         {
-            m_ServerAddress = address;
-            return true;
-        }
-
-        /// <summary>
-        /// Interrogate the server in order to download new messages if any.
-        /// </summary>
-        public void Update()
-        {
-            LogMessages.Add(new LogMessageViewModel());
+            foreach(WcfLogMessage msg in messages.OrderBy(m => m.Time))
+            {
+                lock (m_SyncObject)
+                {
+                    LogMessages.Add(msg);
+                }
+            }
         }
 
         #endregion
@@ -60,12 +70,19 @@ namespace Athena.ViewModels
         /// </summary>
         public string ServerName
         {
-            get { return m_ServerAddress?.ToString(); }
+            get { return m_Model.Address.ToString(); }
+        }
+        /// <summary>
+        /// Gets a flag that indicates if the server is connected.
+        /// </summary>
+        public bool IcConnected
+        {
+            get { return m_Model.IsConnected; }
         }
         /// <summary>
         /// Gets the collection of the avaialble log messages.
         /// </summary>
-        public ObservableCollection<LogMessageViewModel> LogMessages { get; private set; }
+        public ObservableCollection<WcfLogMessage> LogMessages { get; private set; }
 
         #endregion
     }
