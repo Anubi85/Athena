@@ -53,13 +53,21 @@
                 <DataTemplate>
                     <DataGrid
                         ItemsSource="{Binding LogMessages}"
-                        ColumnWidth="*"
-                        CanUserReorderColumns="True"
+                        AutoGenerateColumns="False"
+                        CanUserReorderColumns="False"
                         CanUserSortColumns="False"
                         CanUserDeleteRows="False"
                         CanUserResizeRows="False"
                         CanUserAddRows="False"
-                        HeadersVisibility="Column"/>
+                        HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding Level}" Header="Level" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding ProcessName}" Header="Process" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding MethodName}" Header="Method" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding Text}" Header="Message" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

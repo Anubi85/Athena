@@ -88,6 +88,10 @@ namespace Athena.Models
         /// <returns>The <see cref="LogServerModel"/> associated with the requested server if succeed, null otherwise.</returns>
         public LogServerModel AddServer(IPAddress address)
         {
+            if (m_Servers.ContainsKey(address))
+            {
+                return m_Servers[address];
+            }
             LogServerModel newServer = new LogServerModel(address);
             m_Servers.Add(address, newServer);
             return newServer;
@@ -117,7 +121,7 @@ namespace Athena.Models
         public AthenaModel()
         {
             m_Servers = new Dictionary<IPAddress, LogServerModel>();
-            m_RefreshTime = 15000;
+            m_RefreshTime = 500;
             m_RefreshTimer = new Timer(UpdateServers, new object(), 0, m_RefreshTime);
         }
 
