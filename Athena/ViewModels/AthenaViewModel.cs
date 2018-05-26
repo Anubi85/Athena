@@ -19,6 +19,14 @@ namespace Athena.ViewModels
         /// The model associated with this view model instance.
         /// </summary>
         private AthenaModel m_Model;
+        /// <summary>
+        /// The application options view model.
+        /// </summary>
+        private OptionsViewModel m_Options;
+        /// <summary>
+        /// Dialog service used to display dialogs.
+        /// </summary>
+        private IDialogService m_Dialogservice;
 
         #endregion
 
@@ -59,21 +67,23 @@ namespace Athena.ViewModels
         /// </summary>
         public ObservableCollection<LogServerViewModel> Servers { get; private set; }
         /// <summary>
-        /// Gets or sets a flag that indicates if the rows must be coloured or not.
+        /// Gets a flag that indicates if the rows must be coloured or not.
         /// </summary>
         public bool AreRowsColored
         {
-            get { return m_Model.AreRowsColored; }
-            set { m_Model.AreRowsColored = value; }
+            get { return m_Options.AreRowsColored; }
         }
         /// <summary>
-        /// Gets or sets the refresh time, in milliseconds, for the servers data update.
+        /// Gets the refresh time, in milliseconds, for the servers data update.
         /// </summary>
         public int RefreshTime
         {
-            get { return m_Model.RefreshTime; }
-            set { m_Model.RefreshTime = value; }
+            get { return m_Options.RefreshTime; }
         }
+        /// <summary>
+        /// Gets the command that allows to display the options dialog.
+        /// </summary>
+        public ICommand ShowOptionsCommand { get; private set; }
 
         #endregion
 
@@ -93,21 +103,20 @@ namespace Athena.ViewModels
         private void ConnectToServer(object owner)
         {
             ConnectionViewModel connectionVM = new ConnectionViewModel();
-            IDialogService dialogService = ServiceLocator.Resolve<IDialogService>();
-            bool? result = dialogService.ShowModalDialog(connectionVM, owner as Window);
+            bool? result = m_Dialogservice.ShowModalDialog(connectionVM, owner as Window);
             if (result.HasValue && result.Value && !string.IsNullOrEmpty(connectionVM.AthenaServerAddress))
             {
-                //try to connect to the server
-                LogServerModel server = m_Model.AddServer(IPAddress.Parse(connectionVM.AthenaServerAddress));
-                if (server != null)
-                {
-                    Servers.Add(new LogServerViewModel(server));
-                }
-                else
-                {
-                    dialogService.ShowError(string.Format("Fail to connect to server {0}", connectionVM.AthenaServerAddress));
-                }
+                //add the new server
+                Servers.Add(new LogServerViewModel(m_Model.AddServer(IPAddress.Parse(connectionVM.AthenaServerAddress))));
             }
+        }
+        /// <summary>
+        /// Display the options dialog.
+        /// </summary>
+        /// <param name="owner">The owner window.</param>
+        private void ShowOptionsDialog(object owner)
+        {
+            m_Dialogservice.ShowDialog(m_Options, owner as Window, (vm) => m_Model.ChangeRefreshTimerInterval((vm as OptionsViewModel).RefreshTime));
         }
 
         #endregion
@@ -119,15 +128,19 @@ namespace Athena.ViewModels
         /// </summary>
         public AthenaViewModel()
         {
+            m_Dialogservice = ServiceLocator.Resolve<IDialogService>();
             m_Model = new AthenaModel();
+            m_Options = new OptionsViewModel();
             RegisterPropagation(m_Model, () => m_Model.IsPaused, () => PauseMenuVisibility);
             RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ResumeMenuVisibility);
             RegisterPropagation(m_Model, () => m_Model.AutoScroll, () => AutoScroll);
-            RegisterPropagation(m_Model, () => m_Model.AreRowsColored, () => AreRowsColored);
-            RegisterPropagation(m_Model, () => m_Model.RefreshTime, () => RefreshTime);
+            RegisterPropagation(m_Options, () => m_Options.AreRowsColored, () => AreRowsColored);
+            RegisterPropagation(m_Options, () => m_Options.RefreshTime, () => RefreshTime);
             PauseResumeCommand = new RelayCommand(PauseResume);
             ConnectToServerCommand = new RelayCommand(ConnectToServer);
+            ShowOptionsCommand = new RelayCommand(ShowOptionsDialog);
             Servers = new ObservableCollection<LogServerViewModel>();
+            m_Model.ChangeRefreshTimerInterval(m_Options.RefreshTime);
         }
 
         #endregion

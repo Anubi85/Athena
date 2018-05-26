@@ -45,7 +45,7 @@
             Grid.Row="2"
             Content="OK"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top"
+            VerticalAlignment="Center"
             Padding="15,1"
             VerticalContentAlignment="Center"
             IsDefault="True"

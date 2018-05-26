@@ -1,0 +1,39 @@
+﻿<zc:ZeusDialog x:Class="Athena.Views.OptionsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:v="clr-namespace:Athena.Views"
+        xmlns:vm="clr-namespace:Athena.ViewModels"
+        xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
+        mc:Ignorable="d"
+        Title="Options"
+        SizeToContent="WidthAndHeight"
+        ShowCloseButton="True"
+        WindowStartupLocation="CenterOwner">
+    <zc:ZeusDialog.DataContext>
+        <vm:OptionsViewModel />
+    </zc:ZeusDialog.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <zc:ZeusLabel Grid.Row="0">Refresh Time [ms]</zc:ZeusLabel>
+        <zc:ZeusTextBox Grid.Row="1" Text="{Binding RefreshTime}" />
+        <CheckBox Grid.Row="2" IsChecked="{Binding AreRowsColored}">Color Rows</CheckBox>
+        <zc:ZeusButton
+            Grid.Row="3"
+            Color="Blue"
+            IsBorderVisible="True"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Padding="15,1"
+            Content="OK"
+            VerticalContentAlignment="Center"
+            IsDefault="True"
+            Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusDialog}}}"/>
+    </Grid>
+</zc:ZeusDialog>

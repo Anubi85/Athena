@@ -3,11 +3,11 @@
 namespace Athena.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OptionsView.xaml
     /// </summary>
-    public partial class MainWindow : ZeusWindow
+    public partial class OptionsView : ZeusDialog
     {
-        public MainWindow()
+        public OptionsView()
         {
             InitializeComponent();
         }

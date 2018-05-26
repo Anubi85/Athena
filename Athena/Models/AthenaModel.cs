@@ -21,10 +21,6 @@ namespace Athena.Models
         /// </summary>
         private bool m_AutoScroll;
         /// <summary>
-        /// The time interval between two refresh in milliseconds;
-        /// </summary>
-        private int m_RefreshTime;
-        /// <summary>
         /// Collection of the monitored Athena servers.
         /// </summary>
         private Dictionary<IPAddress, LogServerModel> m_Servers;
@@ -32,10 +28,6 @@ namespace Athena.Models
         /// The timer that handles the server data update.
         /// </summary>
         private Timer m_RefreshTimer;
-        /// <summary>
-        /// A flag that indicates if the rows must be colored or not.
-        /// </summary>
-        private bool m_AreRowsColored;
 
         #endregion
 
@@ -56,26 +48,6 @@ namespace Athena.Models
         {
             get { return m_AutoScroll; }
             set { Set(ref m_AutoScroll, value); }
-        }
-        /// <summary>
-        /// Gets or sets the refresh time, in milliseconds, for the servers data update.
-        /// </summary>
-        public int RefreshTime
-        {
-            get { return m_RefreshTime; }
-            set
-            {
-                Set(ref m_RefreshTime, value);
-                m_RefreshTimer.Change(0, m_RefreshTime);
-            }
-        }
-        /// <summary>
-        /// Gets or sets a flag that indicates if the rows must be coloured or not.
-        /// </summary>
-        public bool AreRowsColored
-        {
-            get { return m_AreRowsColored; }
-            set { Set(ref m_AreRowsColored, value); }
         }
 
         #endregion
@@ -126,6 +98,14 @@ namespace Athena.Models
             }
             return false;
         }
+        /// <summary>
+        /// Change the refresh timer interval.
+        /// </summary>
+        /// <param name="interval">The new timer interval in milliseconds.</param>
+        public void ChangeRefreshTimerInterval(int interval)
+        {
+            m_RefreshTimer.Change(0, interval);
+        }
 
         #endregion
 
@@ -137,8 +117,7 @@ namespace Athena.Models
         public AthenaModel()
         {
             m_Servers = new Dictionary<IPAddress, LogServerModel>();
-            m_RefreshTime = 500;
-            m_RefreshTimer = new Timer(UpdateServers, new object(), 0, m_RefreshTime);
+            m_RefreshTimer = new Timer(UpdateServers, new object(), Timeout.Infinite, Timeout.Infinite);
         }
 
         #endregion

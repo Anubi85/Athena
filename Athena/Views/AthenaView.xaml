@@ -42,7 +42,7 @@
             </zc:ZeusMenuItem>
             <zc:ZeusMenuItem Header="Tools">
                 <zc:ZeusMenuItem Header="Filters" />
-                <zc:ZeusMenuItem Header="Options" />
+                <zc:ZeusMenuItem Header="Options" Command="{Binding ShowOptionsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}" />
             </zc:ZeusMenuItem>
         </zc:ZeusMenu>
         <zc:ZeusTabControl
