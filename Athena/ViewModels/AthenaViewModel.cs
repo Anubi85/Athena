@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Zeus.UI.Mvvm;
 using Zeus.UI.Mvvm.Interfaces;
 
@@ -22,7 +23,11 @@ namespace Athena.ViewModels
         /// <summary>
         /// The application options view model.
         /// </summary>
-        private OptionsViewModel m_Options;
+        private OptionsModel m_Options;
+        /// <summary>
+        /// The Athena log server currently selected.
+        /// </summary>
+        private LogServerViewModel m_SelectedServer;
         /// <summary>
         /// Dialog service used to display dialogs.
         /// </summary>
@@ -40,12 +45,103 @@ namespace Athena.ViewModels
             get { return m_Model.IsPaused; }
         }
         /// <summary>
+        /// Gets the visibility of the paused menu item.
+        /// </summary>
+        public Visibility PauseMenuVisibility
+        {
+            get { return m_Model.IsPaused ? Visibility.Collapsed : Visibility.Visible; }
+        }
+        /// <summary>
+        /// Gets the visibility of the resume menu item.
+        /// </summary>
+        public Visibility ResumeMenuVisibility
+        {
+            get { return m_Model.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
+        }
+        /// <summary>
+        /// Gets the visibility of the paused status bar item.
+        /// </summary>
+        public Visibility PauseLabelVisibility
+        {
+            get { return m_Model.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
+        }
+        /// <summary>
+        /// Gets the visibility of the No Server Connected status bar item.
+        /// </summary>
+        public Visibility NoServerConnectedLabelVisibility
+        {
+            get { return Servers.Count == 0 ? Visibility.Visible : Visibility.Collapsed; }
+        }
+        /// <summary>
+        /// Gets the visibility of the Server Statuc status bar item.
+        /// </summary>
+        public Visibility ServerStatusLabelVisibility
+        {
+            get { return Servers.Count == 0 ? Visibility.Collapsed : Visibility.Visible; }
+        }
+        /// <summary>
         /// Gets or sets a flag that indicates if the autoscroll is enabled.
         /// </summary>
         public bool AutoScroll
         {
             get { return m_Model.AutoScroll; }
             set { m_Model.AutoScroll = value; }
+        }
+        /// <summary>
+        /// Gets or sets the currently selected Athena log server.
+        /// </summary>
+        public LogServerViewModel SelectedServer
+        {
+            get { return m_SelectedServer; }
+            set { Set(ref m_SelectedServer, value); }
+        }
+        /// <summary>
+        /// Gets the text of the Server Status status bar item.
+        /// </summary>
+        public string ServerStatusLabelText
+        {
+            get
+            {
+                if (m_SelectedServer == null)
+                {
+                    return "No Server Selected";
+                }
+                else
+                {
+                    return m_SelectedServer.IsConnected ? "Online" : "Offline";
+                }
+            }
+        }
+        /// <summary>
+        /// Gets the background color of the Server Status statud bar item.
+        /// </summary>
+        public Color? ServerStatusLabelBackgroundColor
+        {
+            get
+            {
+                if (m_Model.IsPaused)
+                {
+                    return (Color)Application.Current.FindResource("YellowColor");
+                }
+                else
+                {
+                    if (m_SelectedServer == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        if (m_SelectedServer.IsConnected)
+                        {
+                            return (Color)Application.Current.FindResource("GreenColor");
+                        }
+                        else
+                        {
+                            return (Color)Application.Current.FindResource("RedColor");
+                        }
+                    }
+                }
+            }
         }
         /// <summary>
         /// Gets the command that handle the Pause/Resume events.
@@ -100,7 +196,7 @@ namespace Athena.ViewModels
             if (result.HasValue && result.Value && !string.IsNullOrEmpty(connectionVM.AthenaServerAddress))
             {
                 //add the new server
-                Servers.Add(new LogServerViewModel(m_Model.AddServer(IPAddress.Parse(connectionVM.AthenaServerAddress))));
+                Servers.Add(new LogServerViewModel(m_Model.AddServer(IPAddress.Parse(connectionVM.AthenaServerAddress)), m_Options));
             }
         }
         /// <summary>
@@ -109,7 +205,7 @@ namespace Athena.ViewModels
         /// <param name="owner">The owner window.</param>
         private void ShowOptionsDialog(object owner)
         {
-            m_Dialogservice.ShowDialog(m_Options, owner as Window, (vm) => m_Model.ChangeRefreshTimerInterval((vm as OptionsViewModel).RefreshTime));
+            m_Dialogservice.ShowDialog(new OptionsViewModel(m_Options), owner as Window, (vm) => m_Model.ChangeRefreshTimerInterval((vm as OptionsViewModel).RefreshTime));
         }
 
         #endregion
@@ -123,16 +219,24 @@ namespace Athena.ViewModels
         {
             m_Dialogservice = ServiceLocator.Resolve<IDialogService>();
             m_Model = new AthenaModel();
-            m_Options = new OptionsViewModel();
+            m_Options = new OptionsModel();
+            m_Model.ChangeRefreshTimerInterval(m_Options.RefreshTime);
+            Servers = new ObservableCollection<LogServerViewModel>();
             RegisterPropagation(m_Model, () => m_Model.IsPaused, () => IsPaused);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => PauseMenuVisibility);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ResumeMenuVisibility);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => PauseLabelVisibility);
+            RegisterPropagation(Servers, () => Servers.Count, () => NoServerConnectedLabelVisibility);
+            RegisterPropagation(Servers, () => Servers.Count, () => ServerStatusLabelVisibility);
             RegisterPropagation(m_Model, () => m_Model.AutoScroll, () => AutoScroll);
+            RegisterPropagation(this, () => SelectedServer, () => ServerStatusLabelText);
+            RegisterPropagation(this, () => SelectedServer, () => ServerStatusLabelBackgroundColor);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ServerStatusLabelBackgroundColor);
             RegisterPropagation(m_Options, () => m_Options.AreRowsColored, () => AreRowsColored);
             RegisterPropagation(m_Options, () => m_Options.RefreshTime, () => RefreshTime);
             PauseResumeCommand = new RelayCommand(PauseResume);
             ConnectToServerCommand = new RelayCommand(ConnectToServer);
-            ShowOptionsCommand = new RelayCommand(ShowOptionsDialog);
-            Servers = new ObservableCollection<LogServerViewModel>();
-            m_Model.ChangeRefreshTimerInterval(m_Options.RefreshTime);
+            ShowOptionsCommand = new RelayCommand(ShowOptionsDialog);                        
         }
 
         #endregion

@@ -1,22 +1,19 @@
-﻿using Zeus.UI.Mvvm;
+﻿using Athena.Models;
+using Zeus.UI.Mvvm;
 
 namespace Athena.ViewModels
 {
     /// <summary>
     /// The view model used for data binding in options view.
     /// </summary>
-    public class OptionsViewModel : ViewModelBase
+    class OptionsViewModel : ViewModelBase
     {
         #region Fields
 
         /// <summary>
-        /// The application refresh time.
+        /// The application options model.
         /// </summary>
-        private int m_RefreshTime;
-        /// <summary>
-        /// A flag that indicates if the rows are colored.
-        /// </summary>
-        private bool m_AreRowsColored;
+        private OptionsModel m_Model;
 
         #endregion
 
@@ -25,9 +22,11 @@ namespace Athena.ViewModels
         /// <summary>
         /// Initialize view model fields.
         /// </summary>
-        public OptionsViewModel()
+        public OptionsViewModel(OptionsModel options)
         {
-            m_RefreshTime = 500;
+            m_Model = options;
+            RegisterPropagation(m_Model, () => m_Model.RefreshTime, () => RefreshTime);
+            RegisterPropagation(m_Model, () => m_Model.AreRowsColored, () => AreRowsColored);
         }
 
         #endregion
@@ -39,16 +38,16 @@ namespace Athena.ViewModels
         /// </summary>
         public int RefreshTime
         {
-            get { return m_RefreshTime; }
-            set { Set(ref m_RefreshTime, value); }
+            get { return m_Model.RefreshTime; }
+            set { m_Model.RefreshTime = value; }
         }
         /// <summary>
         /// Gets or sets the flag that indicates if the rows are colored.
         /// </summary>
         public bool AreRowsColored
         {
-            get { return m_AreRowsColored; }
-            set { Set(ref m_AreRowsColored, value); }
+            get { return m_Model.AreRowsColored; }
+            set { m_Model.AreRowsColored = value; }
         }
 
         #endregion

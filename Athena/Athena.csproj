@@ -67,9 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\LogLevelToSolidColorBrushConverter.cs" />
     <Compile Include="Models\LogServerModel.cs" />
+    <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ViewModels\LogMessageViewModel.cs" />
     <Compile Include="ViewModels\LogServerViewModel.cs" />
     <Compile Include="ViewModels\AthenaViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />

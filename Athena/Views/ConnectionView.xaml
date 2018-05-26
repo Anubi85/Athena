@@ -14,9 +14,6 @@
         Height="Auto"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner">
-    <zc:ZeusDialog.DataContext>
-        <vm:ConnectionViewModel />
-    </zc:ZeusDialog.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

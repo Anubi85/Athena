@@ -6,7 +6,7 @@ using Zeus.UI.Mvvm;
 namespace Athena.Models
 {
     /// <summary>
-    /// The application options model.
+    /// The application behaviour model.
     /// </summary>
     class AthenaModel : ObservableObject
     {

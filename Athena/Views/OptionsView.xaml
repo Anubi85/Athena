@@ -12,9 +12,6 @@
         SizeToContent="WidthAndHeight"
         ShowCloseButton="True"
         WindowStartupLocation="CenterOwner">
-    <zc:ZeusDialog.DataContext>
-        <vm:OptionsViewModel />
-    </zc:ZeusDialog.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

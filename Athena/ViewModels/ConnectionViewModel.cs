@@ -5,7 +5,7 @@ namespace Athena.ViewModels
     /// <summary>
     /// The view model used for data binding in connection view.
     /// </summary>
-    public class ConnectionViewModel : ViewModelBase
+    class ConnectionViewModel : ViewModelBase
     {
         #region Fields
 

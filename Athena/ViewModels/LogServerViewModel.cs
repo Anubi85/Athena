@@ -9,7 +9,7 @@ using Zeus.UI.Mvvm;
 namespace Athena.ViewModels
 {
     /// <summary>
-    /// The view model used for data bingind in server logged messages view.
+    /// The view model used for data bindind in server logged messages view.
     /// </summary>
     class LogServerViewModel : ViewModelBase
     {
@@ -19,6 +19,10 @@ namespace Athena.ViewModels
         /// The model associated with this view model instance.
         /// </summary>
         private LogServerModel m_Model;
+        /// <summary>
+        /// The application options.
+        /// </summary>
+        private OptionsModel m_Options;
         /// <summary>
         /// Syncronization object used to syncronize collection access.
         /// </summary>
@@ -32,13 +36,15 @@ namespace Athena.ViewModels
         /// Initialize view model fields.
         /// </summary>
         /// <param name="model">The <see cref="LogServerModel"/> object that allows to interact with the Athena server.</param>
-        public LogServerViewModel(LogServerModel model)
+        /// <param name="options">The object that contains the application options.</param>
+        public LogServerViewModel(LogServerModel model, OptionsModel options)
         {
             m_Model = model;
+            m_Options = options;
             m_Model.NewMessagesAvaialble += ProcessNewMessages;
             RegisterPropagation(m_Model, () => m_Model.IsConnected, () => IsConnected);
             m_SyncObject = new object();
-            LogMessages = new ObservableCollection<WcfLogMessage>();
+            LogMessages = new ObservableCollection<LogMessageViewModel>();
             BindingOperations.EnableCollectionSynchronization(LogMessages, m_SyncObject);
         }
 
@@ -56,7 +62,7 @@ namespace Athena.ViewModels
             {
                 lock (m_SyncObject)
                 {
-                    LogMessages.Add(msg);
+                    LogMessages.Add(new LogMessageViewModel(msg, m_Options));
                 }
             }
         }
@@ -82,7 +88,7 @@ namespace Athena.ViewModels
         /// <summary>
         /// Gets the collection of the avaialble log messages.
         /// </summary>
-        public ObservableCollection<WcfLogMessage> LogMessages { get; private set; }
+        public ObservableCollection<LogMessageViewModel> LogMessages { get; private set; }
 
         #endregion
     }
