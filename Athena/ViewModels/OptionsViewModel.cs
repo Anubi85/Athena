@@ -1,5 +1,9 @@
 ﻿using Athena.Models;
+using System.Windows.Input;
+using Zeus.Config;
+using Zeus.UI.Controls;
 using Zeus.UI.Mvvm;
+using Zeus.UI.Mvvm.Interfaces;
 
 namespace Athena.ViewModels
 {
@@ -14,6 +18,10 @@ namespace Athena.ViewModels
         /// The application options model.
         /// </summary>
         private OptionsModel m_Model;
+        /// <summary>
+        /// The dialog service that allows to interact with dialogs.
+        /// </summary>
+        private IDialogService m_DialogService;
 
         #endregion
 
@@ -25,6 +33,8 @@ namespace Athena.ViewModels
         public OptionsViewModel(OptionsModel options)
         {
             m_Model = options;
+            m_DialogService = ServiceLocator.Resolve<IDialogService>();
+            SaveAndCloseCommand = new RelayCommand(SaveAndClose);
             RegisterPropagation(m_Model, () => m_Model.RefreshTime, () => RefreshTime);
             RegisterPropagation(m_Model, () => m_Model.AreRowsColored, () => AreRowsColored);
         }
@@ -48,6 +58,25 @@ namespace Athena.ViewModels
         {
             get { return m_Model.AreRowsColored; }
             set { m_Model.AreRowsColored = value; }
+        }
+        /// <summary>
+        /// Gets the command that closes the dialog and serialize the new settings.
+        /// </summary>
+        public ICommand SaveAndCloseCommand { get; private set; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Closes the dialog and save the parameters to file.
+        /// </summary>
+        private void SaveAndClose()
+        {
+            //save settings
+            ConfigManager.SaveSection<OptionsModel>(m_Model);
+            //close the dialog
+            m_DialogService.CloseDialog(this);
         }
 
         #endregion

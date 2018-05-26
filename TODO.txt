@@ -1,2 +1,1 @@
-Serialize options to file
 style the checkbox

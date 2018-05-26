@@ -4,6 +4,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Zeus.Config;
 using Zeus.UI.Mvvm;
 using Zeus.UI.Mvvm.Interfaces;
 
@@ -218,8 +219,14 @@ namespace Athena.ViewModels
         public AthenaViewModel()
         {
             m_Dialogservice = ServiceLocator.Resolve<IDialogService>();
-            m_Model = new AthenaModel();
-            m_Options = new OptionsModel();
+            m_Model = new AthenaModel();            
+            m_Options = ConfigManager.LoadSection<OptionsModel>();
+            //if section not found create it
+            if (m_Options == null)
+            {
+                m_Options = new OptionsModel();
+                ConfigManager.SaveSection<OptionsModel>(m_Options);
+            }
             m_Model.ChangeRefreshTimerInterval(m_Options.RefreshTime);
             Servers = new ObservableCollection<LogServerViewModel>();
             RegisterPropagation(m_Model, () => m_Model.IsPaused, () => IsPaused);

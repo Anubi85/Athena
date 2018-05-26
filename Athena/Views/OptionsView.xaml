@@ -44,6 +44,7 @@
             Content="OK"
             VerticalContentAlignment="Center"
             IsDefault="True"
-            Command="{Binding CloseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusDialog}}}"/>
+            Command="{Binding SaveAndCloseCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusDialog}}}"/>
     </Grid>
 </zc:ZeusDialog>

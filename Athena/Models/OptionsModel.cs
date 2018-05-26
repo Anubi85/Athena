@@ -1,10 +1,12 @@
-﻿using Zeus.UI.Mvvm;
+﻿using Zeus.Config;
+using Zeus.UI.Mvvm;
 
 namespace Athena.Models
 {
     /// <summary>
     /// The application option model.
     /// </summary>
+    [SectionName("Athena")]
     public class OptionsModel : ObservableObject
     {
         #region Fields
