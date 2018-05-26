@@ -6,6 +6,7 @@
         xmlns:v="clr-namespace:Athena.Views"
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
+        xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI"
         mc:Ignorable="d"
         Title="Options"
         SizeToContent="WidthAndHeight"
@@ -22,7 +23,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <zc:ZeusLabel Grid.Row="0">Refresh Time [ms]</zc:ZeusLabel>
-        <zc:ZeusTextBox Grid.Row="1" Text="{Binding RefreshTime}" />
+        <zc:ZeusTextBox
+            Grid.Row="1"
+            Margin="0,0,0,5">
+            <zc:ZeusTextBox.Text>
+                <Binding
+                    Path="RefreshTime"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:IntegerValidationRule MinValue="100" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </zc:ZeusTextBox.Text>
+        </zc:ZeusTextBox>
         <CheckBox Grid.Row="2" IsChecked="{Binding AreRowsColored}">Color Rows</CheckBox>
         <zc:ZeusButton
             Grid.Row="3"
