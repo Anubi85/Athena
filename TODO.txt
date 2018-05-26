@@ -1,0 +1,3 @@
+Serialize options to file
+style the checkbox
+implement validation for numbers (time interval)
