@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Athena.Views"
+        xmlns:v="clr-namespace:Athena.Views"
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
+        xmlns:converters ="clr-namespace:Athena.Converters"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="350"
@@ -14,6 +15,9 @@
         ShowMinimizeButton="True"
         ShowMaximizeButton="True"
         WindowStartupLocation="CenterScreen">
+    <zc:ZeusWindow.Resources>
+        <converters:LogLevelToSolidColorBrushConverter x:Key="LogLevelToSolidColorBrush" />
+    </zc:ZeusWindow.Resources>
     <zc:ZeusWindow.DataContext>
         <vm:AthenaViewModel />
     </zc:ZeusWindow.DataContext>
@@ -33,14 +37,16 @@
             <zc:ZeusMenuItem Header="Edit">
                 <zc:ZeusMenuItem Header="Clear" />
                 <zc:ZeusMenuItem Header="Pause" Visibility="{Binding PauseMenuVisibility}" Command="{Binding PauseResumeCommand}" />
-                <zc:ZeusMenuItem Header="Resume" Visibility="{Binding ContinueMenuVisibility}" Command="{Binding PauseResumeCommand}" />
+                <zc:ZeusMenuItem Header="Resume" Visibility="{Binding ResumeMenuVisibility}" Command="{Binding PauseResumeCommand}" />
                 <zc:ZeusMenuItem Header="Auto Scroll" IsChecked="{Binding AutoScroll}" IsCheckable="True" />
             </zc:ZeusMenuItem>
             <zc:ZeusMenuItem Header="Tools">
                 <zc:ZeusMenuItem Header="Filters" />
+                <zc:ZeusMenuItem Header="Options" />
             </zc:ZeusMenuItem>
         </zc:ZeusMenu>
         <zc:ZeusTabControl
+            x:Name="ServerTabs"
             Grid.Row="1"
             ItemsSource="{Binding Servers}"
             TabStripPlacement="Top">
@@ -61,6 +67,16 @@
                         CanUserAddRows="False"
                         IsReadOnly="True"
                         HeadersVisibility="Column">
+                        <zc:ZeusDataGrid.CellStyle>
+                            <Style TargetType="{x:Type zc:ZeusDataGridCell}">
+                                <Setter Property="IsHitTestVisible" Value="False" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DataContext.AreRowsColored, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}" Value="True">
+                                        <Setter Property="Foreground" Value="{Binding Level, Converter={StaticResource LogLevelToSolidColorBrush}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </zc:ZeusDataGrid.CellStyle>
                         <zc:ZeusDataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding Level}" Header="Level" Width="Auto" />
@@ -73,7 +89,61 @@
             </zc:ZeusTabControl.ContentTemplate>
         </zc:ZeusTabControl>
         <zc:ZeusStatusBar Grid.Row="2">
-            <zc:ZeusStatusBarItem Content="{Binding StatusLabel}" HorizontalAlignment="Right" />
+            <zc:ZeusStatusBarItem Visibility="{Binding ResumeMenuVisibility}" HorizontalAlignment="Left">Paused</zc:ZeusStatusBarItem>
+            <zc:ZeusStatusBarItem HorizontalAlignment="Right" Padding="0">
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <zc:ZeusStatusBarItem
+                        HorizontalAlignment="Right"
+                        Content="No Servers Connected">
+                        <zc:ZeusStatusBarItem.Style>
+                            <Style TargetType="{x:Type zc:ZeusStatusBarItem}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Servers.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </zc:ZeusStatusBarItem.Style>
+                    </zc:ZeusStatusBarItem>
+                    <zc:ZeusStatusBarItem HorizontalAlignment="Right">
+                        <zc:ZeusStatusBarItem.Style>
+                            <Style TargetType="{x:Type zc:ZeusStatusBarItem}">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Setter Property="Content" Value="No Server Selected" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Servers.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SelectedItem.IsConnected, ElementName=ServerTabs}" Value="True">
+                                        <Setter Property="Content" Value="Online" />
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="{DynamicResource GreenColor}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SelectedItem.IsConnected, ElementName=ServerTabs}" Value="False">
+                                        <Setter Property="Content" Value="Offline" />
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="{DynamicResource RedColor}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ResumeMenuVisibility}" Value="Visible">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="{DynamicResource YellowColor}" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </zc:ZeusStatusBarItem.Style>
+                    </zc:ZeusStatusBarItem>
+                </StackPanel>
+            </zc:ZeusStatusBarItem>
         </zc:ZeusStatusBar>
     </Grid>
 </zc:ZeusWindow>

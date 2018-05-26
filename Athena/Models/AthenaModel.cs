@@ -32,6 +32,10 @@ namespace Athena.Models
         /// The timer that handles the server data update.
         /// </summary>
         private Timer m_RefreshTimer;
+        /// <summary>
+        /// A flag that indicates if the rows must be colored or not.
+        /// </summary>
+        private bool m_AreRowsColored;
 
         #endregion
 
@@ -65,6 +69,14 @@ namespace Athena.Models
                 m_RefreshTimer.Change(0, m_RefreshTime);
             }
         }
+        /// <summary>
+        /// Gets or sets a flag that indicates if the rows must be coloured or not.
+        /// </summary>
+        public bool AreRowsColored
+        {
+            get { return m_AreRowsColored; }
+            set { Set(ref m_AreRowsColored, value); }
+        }
 
         #endregion
 
@@ -76,6 +88,10 @@ namespace Athena.Models
         /// <param name="state">An object used for status syncronization purposes.</param>
         private void UpdateServers(object state)
         {
+            if (m_IsPaused)
+            {
+                return;
+            }
             foreach (LogServerModel server in m_Servers.Values)
             {
                 server.Update();

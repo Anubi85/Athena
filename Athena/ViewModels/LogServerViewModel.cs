@@ -36,7 +36,7 @@ namespace Athena.ViewModels
         {
             m_Model = model;
             m_Model.NewMessagesAvaialble += ProcessNewMessages;
-            RegisterPropagation(m_Model, () => m_Model.IsConnected, () => IcConnected);
+            RegisterPropagation(m_Model, () => m_Model.IsConnected, () => IsConnected);
             m_SyncObject = new object();
             LogMessages = new ObservableCollection<WcfLogMessage>();
             BindingOperations.EnableCollectionSynchronization(LogMessages, m_SyncObject);
@@ -75,7 +75,7 @@ namespace Athena.ViewModels
         /// <summary>
         /// Gets a flag that indicates if the server is connected.
         /// </summary>
-        public bool IcConnected
+        public bool IsConnected
         {
             get { return m_Model.IsConnected; }
         }

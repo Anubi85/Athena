@@ -41,7 +41,7 @@
         </zc:ZeusTextBox>
         <zc:ZeusButton
             Color="Blue"
-            IsBordered="True"
+            IsBorderVisible="True"
             Grid.Row="2"
             Content="OK"
             HorizontalAlignment="Center"

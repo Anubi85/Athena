@@ -32,18 +32,11 @@ namespace Athena.ViewModels
             get { return m_Model.IsPaused ? Visibility.Collapsed : Visibility.Visible; }
         }
         /// <summary>
-        /// Gets the visibility of the Continue menu.
+        /// Gets the visibility of the Resume menu.
         /// </summary>
-        public Visibility ContinueMenuVisibility
+        public Visibility ResumeMenuVisibility
         {
             get { return m_Model.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
-        }
-        /// <summary>
-        /// Gets the string that will be shown in the status bar and that represent the current application ststus.
-        /// </summary>
-        public string StatusLabel
-        {
-            get { return m_Model.IsPaused ? "Paused" : "Online"; }
         }
         /// <summary>
         /// Gets or sets a flag that indicates if the autoscroll is enabled.
@@ -65,6 +58,22 @@ namespace Athena.ViewModels
         /// Gets the avaialble Athena log servers.
         /// </summary>
         public ObservableCollection<LogServerViewModel> Servers { get; private set; }
+        /// <summary>
+        /// Gets or sets a flag that indicates if the rows must be coloured or not.
+        /// </summary>
+        public bool AreRowsColored
+        {
+            get { return m_Model.AreRowsColored; }
+            set { m_Model.AreRowsColored = value; }
+        }
+        /// <summary>
+        /// Gets or sets the refresh time, in milliseconds, for the servers data update.
+        /// </summary>
+        public int RefreshTime
+        {
+            get { return m_Model.RefreshTime; }
+            set { m_Model.RefreshTime = value; }
+        }
 
         #endregion
 
@@ -112,8 +121,10 @@ namespace Athena.ViewModels
         {
             m_Model = new AthenaModel();
             RegisterPropagation(m_Model, () => m_Model.IsPaused, () => PauseMenuVisibility);
-            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ContinueMenuVisibility);
-            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => StatusLabel);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ResumeMenuVisibility);
+            RegisterPropagation(m_Model, () => m_Model.AutoScroll, () => AutoScroll);
+            RegisterPropagation(m_Model, () => m_Model.AreRowsColored, () => AreRowsColored);
+            RegisterPropagation(m_Model, () => m_Model.RefreshTime, () => RefreshTime);
             PauseResumeCommand = new RelayCommand(PauseResume);
             ConnectToServerCommand = new RelayCommand(ConnectToServer);
             Servers = new ObservableCollection<LogServerViewModel>();
