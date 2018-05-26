@@ -33,18 +33,11 @@ namespace Athena.ViewModels
         #region Properties
 
         /// <summary>
-        /// Gets the visibility of the Pause menu.
+        /// Gets a flag that indicates if the data refresh is paused.
         /// </summary>
-        public Visibility PauseMenuVisibility
+        public bool IsPaused
         {
-            get { return m_Model.IsPaused ? Visibility.Collapsed : Visibility.Visible; }
-        }
-        /// <summary>
-        /// Gets the visibility of the Resume menu.
-        /// </summary>
-        public Visibility ResumeMenuVisibility
-        {
-            get { return m_Model.IsPaused ? Visibility.Visible : Visibility.Collapsed; }
+            get { return m_Model.IsPaused; }
         }
         /// <summary>
         /// Gets or sets a flag that indicates if the autoscroll is enabled.
@@ -131,8 +124,7 @@ namespace Athena.ViewModels
             m_Dialogservice = ServiceLocator.Resolve<IDialogService>();
             m_Model = new AthenaModel();
             m_Options = new OptionsViewModel();
-            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => PauseMenuVisibility);
-            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => ResumeMenuVisibility);
+            RegisterPropagation(m_Model, () => m_Model.IsPaused, () => IsPaused);
             RegisterPropagation(m_Model, () => m_Model.AutoScroll, () => AutoScroll);
             RegisterPropagation(m_Options, () => m_Options.AreRowsColored, () => AreRowsColored);
             RegisterPropagation(m_Options, () => m_Options.RefreshTime, () => RefreshTime);

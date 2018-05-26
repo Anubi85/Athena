@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
         xmlns:converters ="clr-namespace:Athena.Converters"
+        xmlns:zconverters="clr-namespace:Zeus.UI.Converters;assembly=Zeus.UI"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="350"
@@ -17,6 +18,8 @@
         WindowStartupLocation="CenterScreen">
     <zc:ZeusWindow.Resources>
         <converters:LogLevelToSolidColorBrushConverter x:Key="LogLevelToSolidColorBrush" />
+        <zconverters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <zconverters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibility" />
     </zc:ZeusWindow.Resources>
     <zc:ZeusWindow.DataContext>
         <vm:AthenaViewModel />
@@ -36,8 +39,8 @@
             </zc:ZeusMenuItem>
             <zc:ZeusMenuItem Header="Edit">
                 <zc:ZeusMenuItem Header="Clear" />
-                <zc:ZeusMenuItem Header="Pause" Visibility="{Binding PauseMenuVisibility}" Command="{Binding PauseResumeCommand}" />
-                <zc:ZeusMenuItem Header="Resume" Visibility="{Binding ResumeMenuVisibility}" Command="{Binding PauseResumeCommand}" />
+                <zc:ZeusMenuItem Header="Pause" Visibility="{Binding IsPaused, Converter={StaticResource InvertedBoolToVisibility}}" Command="{Binding PauseResumeCommand}" />
+                <zc:ZeusMenuItem Header="Resume" Visibility="{Binding IsPaused, Converter={StaticResource BoolToVisibility}}" Command="{Binding PauseResumeCommand}" />
                 <zc:ZeusMenuItem Header="Auto Scroll" IsChecked="{Binding AutoScroll}" IsCheckable="True" />
             </zc:ZeusMenuItem>
             <zc:ZeusMenuItem Header="Tools">
@@ -89,7 +92,7 @@
             </zc:ZeusTabControl.ContentTemplate>
         </zc:ZeusTabControl>
         <zc:ZeusStatusBar Grid.Row="2">
-            <zc:ZeusStatusBarItem Visibility="{Binding ResumeMenuVisibility}" HorizontalAlignment="Left">Paused</zc:ZeusStatusBarItem>
+            <zc:ZeusStatusBarItem Visibility="{Binding IsPaused, Converter={StaticResource BoolToVisibility}}" HorizontalAlignment="Left">Paused</zc:ZeusStatusBarItem>
             <zc:ZeusStatusBarItem HorizontalAlignment="Right" Padding="0">
                 <StackPanel Orientation="Horizontal" Margin="0">
                     <zc:ZeusStatusBarItem
@@ -131,7 +134,7 @@
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding ResumeMenuVisibility}" Value="Visible">
+                                    <DataTrigger Binding="{Binding IsPaused}" Value="True">
                                         <Setter Property="Background">
                                             <Setter.Value>
                                                 <SolidColorBrush Color="{DynamicResource YellowColor}" />
