@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Athena Log Viewer"
         Height="350"
         Width="525"
         ShowCloseButton="True"
