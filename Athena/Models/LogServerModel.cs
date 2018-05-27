@@ -12,7 +12,7 @@ namespace Athena.Models
     /// <summary>
     /// Represents an Athena log server and allows to interect with it.
     /// </summary>
-    class LogServerModel : ObservableObject
+    class LogServerModel : ObservableObjectBase
     {
         #region Fields
 

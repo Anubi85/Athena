@@ -7,7 +7,7 @@ namespace Athena.Models
     /// The application option model.
     /// </summary>
     [SectionName("Athena")]
-    public class OptionsModel : ObservableObject
+    public class OptionsModel : ObservableObjectBase
     {
         #region Fields
 

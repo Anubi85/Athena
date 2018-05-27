@@ -8,7 +8,7 @@ namespace Athena.Models
     /// <summary>
     /// The application behaviour model.
     /// </summary>
-    class AthenaModel : ObservableObject
+    class AthenaModel : ObservableObjectBase
     {
         #region Fields
 
