@@ -10,9 +10,6 @@
         Title="Athena Log Viewer"
         Height="350"
         Width="525"
-        ShowCloseButton="True"
-        ShowMinimizeButton="True"
-        ShowMaximizeButton="True"
         WindowStartupLocation="CenterScreen">
     <zc:ZeusWindow.DataContext>
         <vm:AthenaViewModel />

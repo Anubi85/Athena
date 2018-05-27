@@ -9,7 +9,6 @@
         xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI.ValidationRules"
         mc:Ignorable="d"
         Title="ConnectionView"
-        ShowCloseButton="True"
         Width="Auto"
         Height="Auto"
         SizeToContent="WidthAndHeight"
@@ -37,7 +36,6 @@
             </zc:ZeusTextBox.Text>
         </zc:ZeusTextBox>
         <zc:ZeusButton
-            Color="Blue"
             IsBorderVisible="True"
             Grid.Row="2"
             Content="OK"
