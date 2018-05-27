@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Title="Options"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        ShowCloseButton="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
