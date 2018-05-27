@@ -55,6 +55,7 @@
                 <DataTemplate>
                     <zc:ZeusDataGrid
                         ItemsSource="{Binding LogMessages}"
+                        AutoScroll="{Binding DataContext.AutoScroll, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusWindow}}}"
                         AutoGenerateColumns="False"
                         CanUserReorderColumns="False"
                         CanUserSortColumns="False"
@@ -78,7 +79,7 @@
                             <DataGridTextColumn Binding="{Binding Level}" Header="Level" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding Process}" Header="Process" Width="Auto" />
                             <DataGridTextColumn Binding="{Binding Method}" Header="Method" Width="Auto" />
-                            <DataGridTextColumn Binding="{Binding Text}" Header="Message" Width="*" />
+                            <DataGridTextColumn Binding="{Binding Message}" Header="Message" Width="*" />
                         </zc:ZeusDataGrid.Columns>
                     </zc:ZeusDataGrid>
                 </DataTemplate>
