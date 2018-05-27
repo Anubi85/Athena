@@ -65,6 +65,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Zeus\Redist\Zeus.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Zeus.UI.Converters">
+      <HintPath>..\..\Zeus\Redist\Zeus.UI.Converters.dll</HintPath>
+    </Reference>
+    <Reference Include="Zeus.UI.Mvvm">
+      <HintPath>..\..\Zeus\Redist\Zeus.UI.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Zeus.UI.ValidationRules">
+      <HintPath>..\..\Zeus\Redist\Zeus.UI.ValidationRules.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

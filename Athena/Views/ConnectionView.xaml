@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Athena.Views"
         xmlns:vm="clr-namespace:Athena.ViewModels"
         xmlns:zc="clr-namespace:Zeus.UI.Controls;assembly=Zeus.UI"
-        xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI"
+        xmlns:vr="clr-namespace:Zeus.UI.ValidationRules;assembly=Zeus.UI.ValidationRules"
         mc:Ignorable="d"
         Title="ConnectionView"
         ShowCloseButton="True"
@@ -46,6 +46,6 @@
             Padding="15,1"
             VerticalContentAlignment="Center"
             IsDefault="True"
-            Command="{Binding CloseTrueCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type zc:ZeusDialog}}}"/>
+            Command="{Binding CloseDialogCommand}"/>
     </Grid>
 </zc:ZeusDialog>
