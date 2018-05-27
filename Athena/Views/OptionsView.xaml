@@ -33,7 +33,10 @@
                 </Binding>
             </zc:ZeusTextBox.Text>
         </zc:ZeusTextBox>
-        <CheckBox Grid.Row="2" IsChecked="{Binding AreRowsColored}">Color Rows</CheckBox>
+        <zc:ZeusCheckBox
+            Grid.Row="2"
+            Margin="0,0,0,5"
+            IsChecked="{Binding AreRowsColored}">Color Rows</zc:ZeusCheckBox>
         <zc:ZeusButton
             Grid.Row="3"
             Color="Blue"
