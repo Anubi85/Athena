@@ -71,6 +71,9 @@
     <Reference Include="Zeus.UI.Mvvm">
       <HintPath>..\..\Zeus\Redist\Zeus.UI.Mvvm.dll</HintPath>
     </Reference>
+    <Reference Include="Zeus.UI.Themes">
+      <HintPath>..\..\Zeus\Redist\Zeus.UI.Themes.dll</HintPath>
+    </Reference>
     <Reference Include="Zeus.UI.ValidationRules">
       <HintPath>..\..\Zeus\Redist\Zeus.UI.ValidationRules.dll</HintPath>
     </Reference>
