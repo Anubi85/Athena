@@ -60,7 +60,7 @@ namespace Athena.ViewModels
         /// </summary>
         private void CloseDialog()
         {
-            m_DialogService.CloseDialog(this, true);
+            m_DialogService.CloseDialog(this, (bool?)true);
         }
 
         #endregion
