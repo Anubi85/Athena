@@ -1,0 +1,694 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zeus.UI.Mvvm</name>
+    </assembly>
+    <members>
+        <member name="T:Zeus.UI.Mvvm.DialogResult">
+            <summary>
+            Enum that provides the available dialog results.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogResult.Success">
+            <summary>
+            The dialog operation has been completed sucessfully.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogResult.Cancel">
+            <summary>
+            The dialog operation has been cancelled by the user.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogResult.Abort">
+            <summary>
+            The dialog operation has been aborted.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogResult.m_Value">
+            <summary>
+            The <see cref="T:System.Nullable`1"/> value assigned to the instance.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogResult.#ctor(System.Nullable{System.Boolean})">
+            <summary>
+            Initialize a new instance assigning the provided value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogResult.op_Implicit(Zeus.UI.Mvvm.DialogResult)~System.Nullable{System.Boolean}">
+            <summary>
+            Converts the <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value into a <see cref="T:System.Nullable`1"/> value that represent the current value.
+            </summary>
+            <param name="value">The <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value to be converted.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogResult.op_Implicit(System.Nullable{System.Boolean})~Zeus.UI.Mvvm.DialogResult">
+            <summary>
+            Converts the <see cref="T:System.Nullable`1"/> value into the corresponding<see cref="T:Zeus.UI.Mvvm.DialogResult"/> value.
+            </summary>
+            <param name="value">The <see cref="T:System.Nullable`1"/> value to be converted.</param>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.DialogService">
+            <summary>
+            Provides common dialog functionalities.
+            </summary>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.DialogService.WindowRecord">
+            <summary>
+            Stores information about a window opened by the <see cref="T:Zeus.UI.Mvvm.DialogService"/>.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogService.WindowRecord.IsModal">
+            <summary>
+            Gets or sets a flag that indicates if the window associated wit the record is modal.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogService.WindowRecord.Dialog">
+            <summary>
+            The <see cref="T:System.Windows.Window"/> object.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.WindowRecord.#ctor(System.Boolean,System.Windows.Window)">
+            <summary>
+            Initialize a new <see cref="T:Zeus.UI.Mvvm.DialogService.WindowRecord"/> with the given data.
+            </summary>
+            <param name="isModal">The is window modal flag.</param>
+            <param name="dialog">The window instance.</param>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogService.m_ViewStore">
+            <summary>
+            The dictionary that stores the association between the view models and the views.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogService.m_ViewInstanceStore">
+            <summary>
+            The dictionary that stores the open wiews.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.DialogService.m_ViewInstaceExecuteCallbackStore">
+            <summary>
+            The dictionary that stores the result for an open view.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.#ctor">
+            <summary>
+            Initialize the class fields.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Boolean,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="modal">A flag that indicates if the dialog has to be shown as modal.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window)">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>        
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window)">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+            <returns>A <see cref="T:System.Nullable"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,Zeus.UI.Mvvm.DialogResult,System.Nullable{System.Boolean})">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="dialogResult">The result that has to be associated with the dialog.</param>
+            <param name="executeCallback">A flag that indicates if the callback action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,System.Boolean)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="executeCallback">A flag that indicates if the callback action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,Zeus.UI.Mvvm.DialogResult)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="dialogResult">The result that has to be associated with the dialog.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,Zeus.UI.Mvvm.DialogResult,System.Boolean)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="dialogResult">The result that has to be associated with the dialog.</param>
+            <param name="executeCallback">A flag that indicates if the callback action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.Register``2">
+            <summary>
+            Register a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.Update``2">
+            <summary>
+            Update a registered view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.RegisterOrUpdate``2">
+            <summary>
+            Register or update a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.DialogService.Unregister``2">
+            <summary>
+            Unregiser a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.Interfaces.IDialogService">
+            <summary>
+            Provides the methods that a sialog service must implement.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window)">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>        
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new non modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>        
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window)">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.ShowModalDialog(Zeus.UI.Mvvm.ViewModelBase,System.Windows.Window,System.Action{Zeus.UI.Mvvm.ViewModelBase},System.Func{Zeus.UI.Mvvm.DialogResult,System.Boolean})">
+            <summary>
+            Shows a new modal dialog that binds to the provided view model.
+            </summary>
+            <param name="viewModel">The view model of the dialog that has to be shown.</param>
+            <param name="owner">The owner window of the dialog.</param>
+            <param name="callback">Callback action that will be execute after the dialog as been colosed.</param>
+            <param name="canExecuteCallback">A function that specify when the <paramref name="callback"/> action shall be executed.</param>
+            <returns>A <see cref="T:Zeus.UI.Mvvm.DialogResult"/> value that specified whether the activity was accepted (true) or cancelled(false).</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,System.Boolean)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="executeCallback">A flag that indicates if the callback action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,Zeus.UI.Mvvm.DialogResult)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="dialogResult">The result that has to be associated with the dialog.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.CloseDialog(Zeus.UI.Mvvm.ViewModelBase,Zeus.UI.Mvvm.DialogResult,System.Boolean)">
+            <summary>
+            Closes the dialog associated with the given view model.
+            </summary>
+            <param name="viewModel">The view model associated with the dialog that has to be closed.</param>
+            <param name="dialogResult">The result that has to be associated with the dialog.</param>
+            <param name="executeCallback">A flag that indicates if the callback action shall be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.Register``2">
+            <summary>
+            Register a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.Update``2">
+            <summary>
+            Update a registered view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.RegisterOrUpdate``2">
+            <summary>
+            Register or update a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IDialogService.Unregister``2">
+            <summary>
+            Unregiser a view for a specific view model type.
+            </summary>
+            <typeparam name="TView">The view type.</typeparam>
+            <typeparam name="TViewModel">The view model type.</typeparam>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.Interfaces.IMessageBoxService">
+            <summary>
+            Provides the methods that a message box service must implement.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IMessageBoxService.ShowInfo(System.String)">
+            <summary>
+            Shows an information dialog.
+            </summary>
+            <param name="text">The information text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IMessageBoxService.ShowWarning(System.String)">
+            <summary>
+            Shows a warning dialog.
+            </summary>
+            <param name="text">The warning text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IMessageBoxService.ShowError(System.String)">
+            <summary>
+            Shows an error dialog.
+            </summary>
+            <param name="text">The error text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.Interfaces.IMessageBoxService.ShowConfirmation(System.String)">
+            <summary>
+            Shows a confirmation dialog.
+            </summary>
+            <param name="text">The confirmation text that will be shown.</param>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.MessageBoxService">
+            <summary>
+            Provides common message box functionalities.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.MessageBoxService.ShowInfo(System.String)">
+            <summary>
+            Shows an information dialog.
+            </summary>
+            <param name="text">The information text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.MessageBoxService.ShowWarning(System.String)">
+            <summary>
+            Shows a warning dialog.
+            </summary>
+            <param name="text">The warning text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.MessageBoxService.ShowError(System.String)">
+            <summary>
+            Shows an error dialog.
+            </summary>
+            <param name="text">The error text that will be shown.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.MessageBoxService.ShowConfirmation(System.String)">
+            <summary>
+            Shows a confirmation dialog.
+            </summary>
+            <param name="text">The confirmation text that will be shown.</param>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.ObservableObjectBase">
+            <summary>
+            Provides a basic <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> implementation.
+            </summary>
+        </member>
+        <member name="E:Zeus.UI.Mvvm.ObservableObjectBase.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ObservableObjectBase.NotifyPropertyChanged(System.String)">
+            <summary>
+            Raises a <see cref="E:Zeus.UI.Mvvm.ObservableObjectBase.PropertyChanged"/> events for the property that call this function.
+            </summary>
+            <param name="propertyName">The name of the propery that call the method.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ObservableObjectBase.NotifyPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Raises a <see cref="E:Zeus.UI.Mvvm.ObservableObjectBase.PropertyChanged"/> events for the property that call this function.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="propertyExpression">The expression that allows to retrieve the property.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ObservableObjectBase.Set``1(``0@,``0,System.String)">
+            <summary>
+            Set a property value and raise the <see cref="E:Zeus.UI.Mvvm.ObservableObjectBase.PropertyChanged"/> event if needed.
+            </summary>
+            <typeparam name="T">The type of the property that has to be set.</typeparam>
+            <param name="prop">The property store value.</param>
+            <param name="val">The new property value.</param>
+            <param name="propertyName">The property name.</param>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.RelayCommand">
+            <summary>
+            Represents a command object that can be used in databinding.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.RelayCommand.m_ExecuteWithParam">
+            <summary>
+            The action that has to be executed.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.RelayCommand.m_canExecute">
+            <summary>
+            The method that determine if the action can be executed.
+            </summary>
+        </member>
+        <member name="E:Zeus.UI.Mvvm.RelayCommand.CanExecuteChanged">
+            <summary>
+            Event that occours when the can execute condition changes.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Determine if the <see cref="M:Zeus.UI.Mvvm.RelayCommand.Execute(System.Object)"/> method can be executed.
+            </summary>
+            <param name="parameter">Object used to determine execute conditions.</param>
+            <returns>True if can execute, false otherwise</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.Execute(System.Object)">
+            <summary>
+            Execute the command action.
+            </summary>
+            <param name="parameter">Action parameter.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action)">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action,System.Func{System.Object,System.Boolean})">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+            <param name="canExecute">Function that determine if the command can be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+            <param name="canExecute">Function that determine if the command can be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action{System.Object})">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Boolean})">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+            <param name="canExecute">Function that determine if the command can be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Create a new instance of <see cref="T:Zeus.UI.Mvvm.RelayCommand"/>.
+            </summary>
+            <param name="execute">Action that the command shall execute.</param>
+            <param name="canExecute">Function that determine if the command can be executed.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.ToActionWithParam(System.Action)">
+            <summary>
+            Converts an <see cref="T:System.Action"/> into an <see cref="T:System.Action`1"/>.
+            </summary>
+            <param name="action">The <see cref="T:System.Action"/> object that has to be converted.</param>
+            <returns>The <see cref="T:System.Action`1"/> converted object.</returns>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.RelayCommand.ToFuncWithParam(System.Func{System.Boolean})">
+            <summary>
+            Converts a <see cref="T:System.Func`1"/> into a <see cref="T:System.Func`2"/>.
+            </summary>
+            <param name="func">The <see cref="T:System.Func`1"/> object that has to be converted.</param>
+            <returns>The <see cref="T:System.Func`2"/> converted object.</returns>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.ServiceLocator">
+            <summary>
+            Implment a common storage for services and allow to retrieve registered services.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.ServiceLocator.s_ServiceStore">
+            <summary>
+            Stores the registerd service instances.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.#cctor">
+            <summary>
+            Initialize class fields.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.Register``1(``0)">
+            <summary>
+            Register a new service.
+            </summary>
+            <typeparam name="T">The type with which the service will be registered.</typeparam>
+            <param name="instance">The service instance.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.Update``1(``0)">
+            <summary>
+            Update a registred service.
+            </summary>
+            <typeparam name="T">The type with which the service has been registred.</typeparam>
+            <param name="instance">The new service instance.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.RegisterOrUpdate``1(``0)">
+            <summary>
+            Register a new service or update an existing one.
+            </summary>
+            <typeparam name="T">The type with which the service will be registered.</typeparam>
+            <param name="instance">The service instance.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.Unregister``1">
+            <summary>
+            Unregister a registred service.
+            </summary>
+            <typeparam name="T">The type with which the service has been registred.</typeparam>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ServiceLocator.Resolve``1">
+            <summary>
+            Gets the instance of the service registred wih the requested type.
+            </summary>
+            <typeparam name="T">The type of the registered service that must be retrieved.</typeparam>
+            <returns>The registred service instace.</returns>
+        </member>
+        <member name="T:Zeus.UI.Mvvm.ViewModelBase">
+            <summary>
+            Provides common view model functionalities.
+            </summary>
+        </member>
+        <member name="F:Zeus.UI.Mvvm.ViewModelBase.m_RegisterdPropagation">
+            <summary>
+            A dictionary that contains the information about the registed property changes propagation.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ViewModelBase.RegisterPropagation``2(System.ComponentModel.INotifyPropertyChanged,System.Linq.Expressions.Expression{System.Func{``0}},System.Linq.Expressions.Expression{System.Func{``1}})">
+            <summary>
+            Register a model property for the automatic propagation.
+            </summary>
+            <typeparam name="TModel">The type of the model property.</typeparam>
+            <typeparam name="TViewModel">The type of the view model property.</typeparam>
+            <param name="model">The model object.</param>
+            <param name="modelPropExpression">The expression used to retrieve the model property.</param>
+            <param name="viewModelPropExpression">The expression used to retrieve the view model property.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ViewModelBase.UnregisterPropagation``2(System.ComponentModel.INotifyPropertyChanged,System.Linq.Expressions.Expression{System.Func{``0}},System.Linq.Expressions.Expression{System.Func{``1}})">
+            <summary>
+            Unegister a model property for the automatic propagation.
+            </summary>
+            <typeparam name="TModel">The type of the model property.</typeparam>
+            <typeparam name="TViewModel">The type of the view model property.</typeparam>
+            <param name="model">The model object.</param>
+            <param name="modelPropExpression">The expression used to retrieve the model property.</param>
+            <param name="viewModelPropExpression">The expression used to retrieve the view model property.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ViewModelBase.Model_PropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Check if the property changed notification has to be automatically propagated.
+            </summary>
+            <param name="sender">The object that sends the notification.</param>
+            <param name="e">The information about the proprierty that cause the notification.</param>
+        </member>
+        <member name="M:Zeus.UI.Mvvm.ViewModelBase.#ctor">
+            <summary>
+            Initialize class fields.
+            </summary>
+        </member>
+    </members>
+</doc>

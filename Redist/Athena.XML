@@ -4,6 +4,494 @@
         <name>Athena</name>
     </assembly>
     <members>
+        <member name="T:Athena.Models.LogServerModel">
+            <summary>
+            Represents an Athena log server and allows to interect with it.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.LogServerModel.m_ServerAddress">
+            <summary>
+            The address of the Athena log server associated with this object.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.LogServerModel.m_Client">
+            <summary>
+            Client that handle the communication with the Athena log server.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.LogServerModel.m_LastReadMessageDate">
+            <summary>
+            The date of the last message read from the server.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.LogServerModel.m_IsConnected">
+            <summary>
+            A flag that indicates if the server is connected or not.
+            </summary>
+        </member>
+        <member name="E:Athena.Models.LogServerModel.NewMessagesAvaialble">
+            <summary>
+            Event that notify the avaialbility of new log messages.
+            </summary>
+        </member>
+        <member name="M:Athena.Models.LogServerModel.Update">
+            <summary>
+            Checks if new messages are avaialble on the server and in case rise the <see cref="E:Athena.Models.LogServerModel.NewMessagesAvaialble"/> event.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.LogServerModel.Address">
+            <summary>
+            Gets the address of the server associated with this object.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.LogServerModel.IsConnected">
+            <summary>
+            Gets a flag that indicates if the server is connected.
+            </summary>
+        </member>
+        <member name="M:Athena.Models.LogServerModel.#ctor(System.Net.IPAddress)">
+            <summary>
+            Create a new object that represent an Athena log server.
+            </summary>
+            <param name="address">The address of the server.</param>
+        </member>
+        <member name="T:Athena.Models.OptionsModel">
+            <summary>
+            The application option model.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.OptionsModel.m_RefreshTime">
+            <summary>
+            The application refresh time.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.OptionsModel.m_AreRowsColored">
+            <summary>
+            A flag that indicates if the rows are colored.
+            </summary>
+        </member>
+        <member name="M:Athena.Models.OptionsModel.#ctor">
+            <summary>
+            Initialize model fields.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.OptionsModel.RefreshTime">
+            <summary>
+            Gets or sets the application refresh time.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.OptionsModel.AreRowsColored">
+            <summary>
+            Gets or sets the flag that indicates if the rows are colored.
+            </summary>
+        </member>
+        <member name="T:Athena.Models.AthenaModel">
+            <summary>
+            The application behaviour model.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.AthenaModel.m_IsPaused">
+            <summary>
+            A flags that indicates if the log message update is paused or not.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.AthenaModel.m_AutoScroll">
+            <summary>
+            A flag that indicates if the message list shall sroll automatically.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.AthenaModel.m_Servers">
+            <summary>
+            Collection of the monitored Athena servers.
+            </summary>
+        </member>
+        <member name="F:Athena.Models.AthenaModel.m_RefreshTimer">
+            <summary>
+            The timer that handles the server data update.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.AthenaModel.IsPaused">
+            <summary>
+            Gets or sets the flag that pause/resume the log message update.
+            </summary>
+        </member>
+        <member name="P:Athena.Models.AthenaModel.AutoScroll">
+            <summary>
+            Gets or sets the flag that enable or disable the log message list auto scroll.
+            </summary>
+        </member>
+        <member name="M:Athena.Models.AthenaModel.UpdateServers(System.Object)">
+            <summary>
+            Update timer callback functions. Perform an update of all the avaialble Athena log servers.
+            </summary>
+            <param name="state">An object used for status syncronization purposes.</param>
+        </member>
+        <member name="M:Athena.Models.AthenaModel.AddServer(System.Net.IPAddress)">
+            <summary>
+            Add a new Athena log server to the monitored servers collection.
+            </summary>
+            <param name="address">The address of the server that has to be added.</param>
+            <returns>The <see cref="T:Athena.Models.LogServerModel"/> associated with the requested server if succeed, null otherwise.</returns>
+        </member>
+        <member name="M:Athena.Models.AthenaModel.RemoveServer(System.Net.IPAddress)">
+            <summary>
+            Remove an Athena log server from the monitored servers collection.
+            </summary>
+            <param name="address">The address of the server that has to be removed.</param>
+            <returns>true if the server has been sucessfully removed, falce othervise</returns>
+        </member>
+        <member name="M:Athena.Models.AthenaModel.ChangeRefreshTimerInterval(System.Int32)">
+            <summary>
+            Change the refresh timer interval.
+            </summary>
+            <param name="interval">The new timer interval in milliseconds.</param>
+        </member>
+        <member name="M:Athena.Models.AthenaModel.#ctor">
+            <summary>
+            Intializes class internal fields and starts the update timer.
+            </summary>
+        </member>
+        <member name="T:Athena.ViewModels.ConnectionViewModel">
+            <summary>
+            The view model used for data binding in connection view.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.ConnectionViewModel.m_ServerAddress">
+            <summary>
+            The address of the Athena log server.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.ConnectionViewModel.m_DialogService">
+            <summary>
+            The dialog service that managed the application dialogs.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.ConnectionViewModel.#ctor">
+            <summary>
+            Initialize view model fields.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.ConnectionViewModel.AthenaServerAddress">
+            <summary>
+            Gets or sets the Athena server address.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.ConnectionViewModel.CloseDialogCommand">
+            <summary>
+            Gets the command that closes the dialog.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.ConnectionViewModel.CloseDialog">
+            <summary>
+            Closes the dialog assocated with the view model.
+            </summary>
+        </member>
+        <member name="T:Athena.ViewModels.LogMessageViewModel">
+            <summary>
+            The view model used for message data bindind in server logged messages view.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.LogMessageViewModel.m_Model">
+            <summary>
+            The model that contains all the message data.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.LogMessageViewModel.m_Options">
+            <summary>
+            The application options.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.Time">
+            <summary>
+            Gets the message time.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.Level">
+            <summary>
+            Gets the log message level.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.Process">
+            <summary>
+            Gets the name of the process that generate the message.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.Method">
+            <summary>
+            Gets the name of the method that generate the message.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.Message">
+            <summary>
+            Gets the message text.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogMessageViewModel.RowForegroundColor">
+            <summary>
+            Gets the foreground color of the datagrid row.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.LogMessageViewModel.#ctor(Athena.Wcf.WcfLogMessage,Athena.Models.OptionsModel)">
+            <summary>
+            Initialize the view model data.
+            </summary>
+            <param name="msg">The message object associated with the view model.</param>
+            <param name="options">The application options.</param>
+        </member>
+        <member name="T:Athena.ViewModels.LogServerViewModel">
+            <summary>
+            The view model used for data bindind in server logged messages view.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.LogServerViewModel.m_Model">
+            <summary>
+            The model associated with this view model instance.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.LogServerViewModel.m_Options">
+            <summary>
+            The application options.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.LogServerViewModel.m_SyncObject">
+            <summary>
+            Syncronization object used to syncronize collection access.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.LogServerViewModel.#ctor(Athena.Models.LogServerModel,Athena.Models.OptionsModel)">
+            <summary>
+            Initialize view model fields.
+            </summary>
+            <param name="model">The <see cref="T:Athena.Models.LogServerModel"/> object that allows to interact with the Athena server.</param>
+            <param name="options">The object that contains the application options.</param>
+        </member>
+        <member name="M:Athena.ViewModels.LogServerViewModel.ProcessNewMessages(System.Collections.Generic.List{Athena.Wcf.WcfLogMessage})">
+            <summary>
+            Process the new messages received from the server.
+            </summary>
+            <param name="messages">The list of the new messages received.</param>
+        </member>
+        <member name="P:Athena.ViewModels.LogServerViewModel.ServerName">
+            <summary>
+            Gets the Athena log server name.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogServerViewModel.IsConnected">
+            <summary>
+            Gets a flag that indicates if the server is connected.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.LogServerViewModel.LogMessages">
+            <summary>
+            Gets the collection of the avaialble log messages.
+            </summary>
+        </member>
+        <member name="T:Athena.ViewModels.AthenaViewModel">
+            <summary>
+            The view model used for data binding in the application main view.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.AthenaViewModel.m_Model">
+            <summary>
+            The model associated with this view model instance.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.AthenaViewModel.m_Options">
+            <summary>
+            The application options view model.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.AthenaViewModel.m_SelectedServer">
+            <summary>
+            The Athena log server currently selected.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.AthenaViewModel.m_Dialogservice">
+            <summary>
+            Dialog service used to display dialogs.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.IsPaused">
+            <summary>
+            Gets a flag that indicates if the data refresh is paused.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.PauseMenuVisibility">
+            <summary>
+            Gets the visibility of the paused menu item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ResumeMenuVisibility">
+            <summary>
+            Gets the visibility of the resume menu item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.PauseLabelVisibility">
+            <summary>
+            Gets the visibility of the paused status bar item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.NoServerConnectedLabelVisibility">
+            <summary>
+            Gets the visibility of the No Server Connected status bar item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ServerStatusLabelVisibility">
+            <summary>
+            Gets the visibility of the Server Statuc status bar item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.AutoScroll">
+            <summary>
+            Gets or sets a flag that indicates if the autoscroll is enabled.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.SelectedServer">
+            <summary>
+            Gets or sets the currently selected Athena log server.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ServerStatusLabelText">
+            <summary>
+            Gets the text of the Server Status status bar item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ServerStatusLabelBackgroundColor">
+            <summary>
+            Gets the background color of the Server Status statud bar item.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.PauseResumeCommand">
+            <summary>
+            Gets the command that handle the Pause/Resume events.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ConnectToServerCommand">
+            <summary>
+            Gets the command that handles the connection to a server.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.Servers">
+            <summary>
+            Gets the avaialble Athena log servers.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.AreRowsColored">
+            <summary>
+            Gets a flag that indicates if the rows must be coloured or not.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.RefreshTime">
+            <summary>
+            Gets the refresh time, in milliseconds, for the servers data update.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.AthenaViewModel.ShowOptionsCommand">
+            <summary>
+            Gets the command that allows to display the options dialog.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.AthenaViewModel.PauseResume">
+            <summary>
+            Pause or Resume the log message update.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.AthenaViewModel.ConnectToServer(System.Object)">
+            <summary>
+            Connects to a server to retrieve messages.
+            </summary>
+            <param name="owner">The owner window.</param>
+        </member>
+        <member name="M:Athena.ViewModels.AthenaViewModel.ShowOptionsDialog(System.Object)">
+            <summary>
+            Display the options dialog.
+            </summary>
+            <param name="owner">The owner window.</param>
+        </member>
+        <member name="M:Athena.ViewModels.AthenaViewModel.#ctor">
+            <summary>
+            Initialize the view model fields.
+            </summary>
+        </member>
+        <member name="T:Athena.ViewModels.OptionsViewModel">
+            <summary>
+            The view model used for data binding in options view.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.OptionsViewModel.m_Model">
+            <summary>
+            The application options model.
+            </summary>
+        </member>
+        <member name="F:Athena.ViewModels.OptionsViewModel.m_DialogService">
+            <summary>
+            The dialog service that allows to interact with dialogs.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.OptionsViewModel.#ctor(Athena.Models.OptionsModel)">
+            <summary>
+            Initialize view model fields.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.OptionsViewModel.RefreshTime">
+            <summary>
+            Gets or sets the application refresh time.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.OptionsViewModel.AreRowsColored">
+            <summary>
+            Gets or sets the flag that indicates if the rows are colored.
+            </summary>
+        </member>
+        <member name="P:Athena.ViewModels.OptionsViewModel.SaveAndCloseCommand">
+            <summary>
+            Gets the command that closes the dialog and serialize the new settings.
+            </summary>
+        </member>
+        <member name="M:Athena.ViewModels.OptionsViewModel.SaveAndClose">
+            <summary>
+            Closes the dialog and save the parameters to file.
+            </summary>
+        </member>
+        <member name="T:Athena.Views.OptionsView">
+            <summary>
+            Interaction logic for OptionsView.xaml
+            </summary>
+            <summary>
+            OptionsView
+            </summary>
+        </member>
+        <member name="M:Athena.Views.OptionsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Athena.Views.ConnectionView">
+            <summary>
+            Interaction logic for ConnectionView.xaml
+            </summary>
+            <summary>
+            ConnectionView
+            </summary>
+        </member>
+        <member name="M:Athena.Views.ConnectionView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Athena.Views.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:Athena.Views.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:Athena.App">
             <summary>
             Interaction logic for App.xaml
@@ -20,19 +508,6 @@
         <member name="M:Athena.App.Main">
             <summary>
             Application Entry Point.
-            </summary>
-        </member>
-        <member name="T:Athena.MainWindow">
-            <summary>
-            Interaction logic for MainWindow.xaml
-            </summary>
-            <summary>
-            MainWindow
-            </summary>
-        </member>
-        <member name="M:Athena.MainWindow.InitializeComponent">
-            <summary>
-            InitializeComponent
             </summary>
         </member>
         <member name="T:Athena.Properties.Resources">
@@ -54,6 +529,36 @@
         <member name="P:Athena.Properties.Resources.Athena">
             <summary>
               Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zeus.UI.ValidationRules</name>
+    </assembly>
+    <members>
+        <member name="T:Zeus.UI.ValidationRules.IntegerValidationRule">
+            <summary>
+            Provides logic to validate a text as an integer number within specified limits.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.ValidationRules.IntegerValidationRule.Validate(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Perform validation checks.
+            </summary>
+            <param name="value">The value from the binding target to check.</param>
+            <param name="cultureInfo">The culture to use in this rule.</param>
+            <returns>The <see cref="T:System.Windows.Controls.ValidationResult"/> object that contains the result of the validation checks.</returns>
+        </member>
+        <member name="P:Zeus.UI.ValidationRules.IntegerValidationRule.MaxValue">
+            <summary>
+            Gets or sets the maximum valid value for the integer number.
+            </summary>
+        </member>
+        <member name="P:Zeus.UI.ValidationRules.IntegerValidationRule.MinValue">
+            <summary>
+            Gets or sets the minimum valid value for the integer number.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.ValidationRules.IntegerValidationRule.#ctor">
+            <summary>
+            Initialize class fields to the default values.
+            </summary>
+        </member>
+        <member name="T:Zeus.UI.ValidationRules.IPTextValidationRule">
+            <summary>
+            Provides logic to validate a text as an IP address.
+            </summary>
+        </member>
+        <member name="M:Zeus.UI.ValidationRules.IPTextValidationRule.Validate(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Perform validation checks.
+            </summary>
+            <param name="value">The value from the binding target to check.</param>
+            <param name="cultureInfo">The culture to use in this rule.</param>
+            <returns>The <see cref="T:System.Windows.Controls.ValidationResult"/> object that contains the result of the validation checks.</returns>
+        </member>
+        <member name="M:Zeus.UI.ValidationRules.IPTextValidationRule.ValidateIPv4Address(System.String)">
+            <summary>
+            Checks if the given string is a valid IPv4 address.
+            </summary>
+            <param name="strAddress">The string to be checked.</param>
+            <returns>true if the string is a valid address, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.UI.ValidationRules.IPTextValidationRule.ValidateIPv6Address(System.String)">
+            <summary>
+            Checks if the given string is a valid IPv6 address.
+            </summary>
+            <param name="strAddress">The string to be checked.</param>
+            <returns>true if the string is a valid address, false otherwise.</returns>
+        </member>
+    </members>
+</doc>

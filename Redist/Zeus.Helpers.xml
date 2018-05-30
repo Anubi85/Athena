@@ -1,0 +1,835 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zeus.Helpers</name>
+    </assembly>
+    <members>
+        <member name="T:Zeus.Helpers.Kernel32Helper">
+            <summary>
+            Helper class for native methods from Kernel32 dll.
+            </summary>
+        </member>
+        <member name="M:Zeus.Helpers.Kernel32Helper.GetModuleHandle(System.String)">
+            <summary>
+            Gets the handle of the module identified by the given name.
+            </summary>
+            <param name="lpModuleName">The name of the module wich handle has to be retieved.</param>
+            <returns>The handle of the module if succeed, <see cref="F:System.IntPtr.Zero"/> if fails.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.Kernel32Helper.GetCurrentThreadId">
+            <summary>
+            Retrieves the thread identifier of the calling thread.
+            </summary>
+            <returns>The thread identifier of the calling thread.</returns>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper">
+            <summary>
+            Helper class for native methods from Shell32 dll.
+            </summary>
+        </member>
+        <member name="M:Zeus.Helpers.Shell32Helper.Shell_NotifyIcon(Zeus.Helpers.Shell32Helper.NIM,Zeus.Helpers.Shell32Helper.NOTIFYICONDATA@)">
+            <summary>
+            Sends a message to the taskbar's status area.
+            </summary>
+            <param name="dwMessage">A value that specifies the action to be taken by this function.</param>
+            <param name="lpdata">A pointer to a <see cref="T:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA"/> structure. The content of the structure depends on the value of <paramref name="dwMessage"/>.</param>
+            <returns>Returns true if succeed, false otherwise.</returns>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA">
+            <summary>
+            Contains information that the system needs to display notifications in the notification area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.cbSize">
+            <summary>
+            The size of this structure, in bytes.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.hWnd">
+            <summary>
+            A handle to the window that receives notifications associated with an icon in the notification area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uID">
+            <summary>
+            The application-defined identifier of the taskbar icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uFlags">
+            <summary>
+            Flags that either indicate which of the other members of the structure contain valid data
+            or provide additional information to the tooltip as to how it should display.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uCallbackMessage">
+            <summary>
+            An application-defined message identifier.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.hIcon">
+            <summary>
+            A handle to the icon to be added, modified, or deleted. 
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szTip">
+            <summary>
+            Standard tooltip text.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwState">
+            <summary>
+            The state of the icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwStateMask">
+            <summary>
+            A value that specifies which bits of the <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwState"/> member are retrieved or modified.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szInfo">
+            <summary>
+            The text to be displayed in a balloon notification.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uVersion">
+            <summary>
+            Icon version.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szInfoTitle">
+            <summary>
+            Title text for a balloon notification.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwInfoFlags">
+            <summary>
+            Flags that can be set to modify the behavior and appearance of a balloon notification.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.guidItem">
+            <summary>
+            A registered <see cref="T:System.Guid"/> that identifies the icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.hBalloonIcon">
+            <summary>
+            The handle of a customized notification icon provided by the application
+            that should be used independently of the notification area icon.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper.NIF">
+            <summary>
+            Valid memebrs of <see cref="T:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA"/> structure.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.MESSAGE">
+            <summary>
+            The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uCallbackMessage"/> member is valid.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.ICON">
+            <summary>
+            The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.hIcon"/> member is valid.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.TIP">
+            <summary>
+            The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szTip"/> member is valid.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.INFO">
+            <summary>
+            Display a balloon notification. The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szInfo"/>, <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.szInfoTitle"/>,
+            <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwInfoFlags"/>, and <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uVersion"/> members are valid.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.STATE">
+            <summary>
+            The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwState"/> and <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.dwStateMask"/> members are valid.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.GUID">
+            <summary>
+            The <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.guidItem"/> is valid. When used <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uID"/> member is ignored.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.REALTIME">
+            <summary>
+            If the balloon notification cannot be displayed immediately, discard it.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIF.SHOWTIP">
+            <summary>
+            Use the standard tooltip.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper.NIM">
+            <summary>
+            <see cref="M:Zeus.Helpers.Shell32Helper.Shell_NotifyIcon(Zeus.Helpers.Shell32Helper.NIM,Zeus.Helpers.Shell32Helper.NOTIFYICONDATA@)"/> actions.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIM.ADD">
+            <summary>
+            Adds an icon to the status area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIM.MODIFY">
+            <summary>
+            Modifies an icon in the status area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIM.DELETE">
+            <summary>
+            Deletes an icon from the status area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIM.SETFOCUS">
+            <summary>
+            Returns focus to the taskbar notification area.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIM.SETVERSION">
+            <summary>
+            Instructs the notification area to behave according to the version number specified in the <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.uVersion"/> member of the structure pointed to by <paramref name="lpdata"/> in <see cref="M:Zeus.Helpers.Shell32Helper.Shell_NotifyIcon(Zeus.Helpers.Shell32Helper.NIM,Zeus.Helpers.Shell32Helper.NOTIFYICONDATA@)"/>.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper.NIS">
+            <summary>
+            Notify icon states.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIS.HIDDEN">
+            <summary>
+            The icon is hidden.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIS.SHAREDICON">
+            <summary>
+            The icon resource is shared between multiple icons.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.Shell32Helper.NIIF">
+            <summary>
+            Flags that can be set to modify the behavior and appearance of a balloon notification.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.NONE">
+            <summary>
+            No icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.INFO">
+            <summary>
+            An information icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.WARNING">
+            <summary>
+            A warning icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.ERROR">
+            <summary>
+            An error icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.USER">
+            <summary>
+            Use the icon identified in <see cref="F:Zeus.Helpers.Shell32Helper.NOTIFYICONDATA.hBalloonIcon"/> as the notification balloon's title icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.NOSOUND">
+            <summary>
+            Do not play the associated sound.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.LARGE_ICON">
+            <summary>
+            The large version of the icon should be used as the notification icon.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.Shell32Helper.NIIF.RESPECT_QUIET_TIME">
+            <summary>
+            Do not display the balloon notification if the current user is in "quiet time".
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper">
+            <summary>
+            Helper class for native methods from User32 dll.
+            </summary>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.SetWindowsHookEx(Zeus.Helpers.User32Helper.WH,System.Delegate,System.IntPtr,System.UInt32)">
+            <summary>
+            Installs an application-defined hook procedure into a hook chain.
+            </summary>
+            <param name="idHook">The type of hook procedure to be installed.</param>
+            <param name="lpfn">Hook procedure callback function.</param>
+            <param name="hMod">A handle to the DLL containing the hook procedure pointed to by the <paramref name="lpfn"/> parameter.</param>
+            <param name="dwThreadId">The identifier of the thread with which the hook procedure is to be associated.</param>
+            <returns>Returns the handle of the hook procedureif succeed, <see cref="F:System.IntPtr.Zero"/> otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.UnhookWindowsHookEx(System.IntPtr)">
+            <summary>
+            Removes a hook procedure installed in a hook chain by the <see cref="!:SetWindowsHookEx(WH, LowLevelKeyboardProc, IntPtr, uint)"/> function
+            </summary>
+            <param name="hhk">A handle to the hook to be removed.</param>
+            <returns>Returns true if succeed, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.CallNextHookEx(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Passes the hook information to the next hook procedure in the current hook chain.
+            </summary>
+            <param name="hhk">A handle to the hook, this parameter is ignored.</param>
+            <param name="nCode">The hook code passed to the current hook procedure.</param>
+            <param name="wParam">The wParam value passed to the current hook procedure.</param>
+            <param name="lParam">The lParam value passed to the current hook procedure.</param>
+            <returns>The retrun value of the next hook procedure in the chain.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.GetKeyState(System.Int32)">
+            <summary>
+            Retrieves the status of the specified virtual key.
+            </summary>
+            <param name="keyCode">Virtual key code to wich retrieve the status.</param>
+            <returns>Returns the status of the specified virtual key.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.RegisterWindowMessage(System.String)">
+            <summary>
+            Defines a new window message that is guaranteed to be unique throughout the system.
+            </summary>
+            <param name="lpString">The message to be registered.</param>
+            <returns>Returns the message identifiaer in the range 0xC000 - 0xFFFF if succeed, zero otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.RegisterHotKey(System.IntPtr,System.Int32,Zeus.Helpers.User32Helper.MOD,System.Int32)">
+            <summary>
+            Register a system wide hot-key.
+            </summary>
+            <param name="hWnd">A handle to the window that will receive <see cref="F:Zeus.Helpers.User32Helper.WM.HOTKEY"/> messages generated by the hot key. </param>
+            <param name="id">The identifier of the hot key.</param>
+            <param name="fsModifiers">The keys that must be pressed in combination with the key specified by the
+            <paramref name="vk"/> parameter in order to generate the <see cref="F:Zeus.Helpers.User32Helper.WM.HOTKEY"/> message. </param>
+            <param name="vk">The virtual-key code of the hot key.</param>
+            <returns>Returns true if succeed, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.UnregisterHotKey(System.IntPtr,System.Int32)">
+            <summary>
+            Frees a hot key previously registered by the calling thread.
+            </summary>
+            <param name="hWnd">A handle to the window associated with the hot key to be freed.</param>
+            <param name="id">The identifier of the hot key to be freed.</param>
+            <returns>Returns true if succeed, false otherwise.</returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.DefWindowProc(System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Calls the default window procedure to provide default processing for any window messages that an application does not process.
+            </summary>
+            <param name="hWnd">A handle to the window procedure that received the message.</param>
+            <param name="Msg">The message.</param>
+            <param name="wParam">Additional message information. The content of this parameter depends on the value of the <paramref name="Msg"/> parameter.</param>
+            <param name="lParam">Additional message information. The content of this parameter depends on the value of the <paramref name="Msg"/> parameter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Zeus.Helpers.User32Helper.SetForegroundWindow(System.IntPtr)">
+            <summary>
+            Bring the thread that create the specified window into the foreground and activates the window.
+            </summary>
+            <param name="hWnd">A handle to the window that should be activated and brought to the foreground.</param>
+            <returns>True if succeed, false otherwise.</returns>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.LowLevelKeyboardProc">
+            <summary>
+            Delegate for LowLevelKeyboardProc hooks.
+            </summary>
+            <param name="nCode">A code the hook procedure uses to determine how to process the message.
+            If nCode is less than zero, the hook procedure must pass the message to the <see cref="!:CallNextHookEx(IntPtr, int, int, IntPtr)"/>
+            function without further processing and should return the value returned by <see cref="!:CallNextHookEx(IntPtr, int, int, IntPtr)"/>.</param>
+            <param name="wParam">The identifier of the keyboard message.</param>
+            <param name="lParam">A pointer to a <see cref="T:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT"/> structure.</param>
+            <returns>If returns <see cref="F:System.IntPtr.Zero"/> other message hooks in the queue are not processed,
+            otherwise processing continues normally.</returns>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.CallWndProc">
+            <summary>
+            Delegate for CallWndProc hooks.
+            </summary>
+            <param name="nCode">A code the hook procedure uses to determine how to process the message.
+            If nCode is less than zero, the hook procedure must pass the message to the <see cref="!:CallNextHookEx(IntPtr, int, int, IntPtr)"/>
+            function without further processing and should return the value returned by <see cref="!:CallNextHookEx(IntPtr, int, int, IntPtr)"/>.</param>
+            <param name="wParam">Specifies whether the message was sent by the current thread. If the message was sent by the current thread, it is nonzero; otherwise, it is zero.</param>
+            <param name="lParam">A pointer to a <see cref="T:Zeus.Helpers.User32Helper.CWPSTRUCT"/> structure that contains details about the message..</param>
+            <returns>If returns <see cref="F:System.IntPtr.Zero"/> other message hooks in the queue are not processed,
+            otherwise processing continues normally.</returns>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT">
+            <summary>
+            Contains information about a low-level keyboard input event.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.vkCode">
+            <summary>
+            A virtual-key code.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.scanCode">
+            <summary>
+            A hardware scan code for the key.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.flags">
+            <summary>
+            The extended-key flag, event-injected flags, context code, and transition-state flag.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.time">
+            <summary>
+            The time stamp for this message.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.dwExtraInfo">
+            <summary>
+            Additional information associated with the message.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.CWPSTRUCT">
+            <summary>
+            Contains information about a not yet processed message sent to the thread.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.CWPSTRUCT.lParam">
+            <summary>
+            Additional information about the message. The exact meaning depends on the <see cref="F:Zeus.Helpers.User32Helper.CWPSTRUCT.message"/> value.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.CWPSTRUCT.wParam">
+            <summary>
+            Additional information about the message. The exact meaning depends on the <see cref="F:Zeus.Helpers.User32Helper.CWPSTRUCT.message"/> value.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.CWPSTRUCT.message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.CWPSTRUCT.hwnd">
+            <summary>
+            A handle to the window to receive the message.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.MOD">
+            <summary>
+            Modifier key flags.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.MOD.ALT">
+            <summary>
+            Either ALT key must be held down.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.MOD.CONTROL">
+            <summary>
+            Either CTRL key must be held down.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.MOD.NOREPEAT">
+            <summary>
+            Changes the hotkey behavior so that the keyboard auto-repeat does not yield multiple hotkey notifications.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.MOD.SHIFT">
+            <summary>
+            Either SHIFT key must be held down.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.MOD.WIN">
+            <summary>
+            Either WINDOWS key was held down.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.LLKHF">
+            <summary>
+            <see cref="F:Zeus.Helpers.User32Helper.KBDLLHOOKSTRUCT.flags"/> values.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.LLKHF.EXTENDED">
+            <summary>
+            Test the extended-key flag.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.LLKHF.LOWER_IL_INJECTED">
+            <summary>
+            Test the event-injected (from a process running at lower integrity level) flag.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.LLKHF.INJECTED">
+            <summary>
+            Test the event-injected (from any process) flag.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.LLKHF.ALTDOWN">
+            <summary>
+            Test the context code.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.LLKHF.UP">
+            <summary>
+            Test the transition-state flag.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.WH">
+            <summary>
+            Hook procedure types.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.MSGFILTER">
+            <summary>
+            Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box,
+            message box, menu, or scroll bar.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.JOURNALRECORD">
+            <summary>
+            Installs a hook procedure that records input messages posted to the system message queue.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.JOURNALPLAYBACK">
+            <summary>
+            Installs a hook procedure that posts messages previously recorded by a <see cref="F:Zeus.Helpers.User32Helper.WH.JOURNALRECORD"/> hook procedure.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.KEYBOARD">
+            <summary>
+            Installs a hook procedure that monitors keystroke messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.GETMESSAGE">
+            <summary>
+            Installs a hook procedure that monitors messages posted to a message queue.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.CALLWNDPROC">
+            <summary>
+            Installs a hook procedure that monitors messages before the system sends them to the destination window procedure.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.CBT">
+            <summary>
+            Installs a hook procedure that receives notifications useful to a CBT application.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.SYSMSGFILTER">
+            <summary>
+            Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box,
+            message box, menu, or scroll bar. 
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.MOUSE">
+            <summary>
+            Installs a hook procedure that monitors mouse messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.DEBUG">
+            <summary>
+            Installs a hook procedure useful for debugging other hook procedures.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.SHELL">
+            <summary>
+            Installs a hook procedure that receives notifications useful to shell applications.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.FOREGROUNDIDLE">
+            <summary>
+            Installs a hook procedure that will be called when the application's foreground thread is about to become idle.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.CALLWNDPROCRET">
+            <summary>
+            Installs a hook procedure that monitors messages after they have been processed by the destination window procedure.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.KEYBOARD_LL">
+            <summary>
+            Installs a hook procedure that monitors low-level keyboard input events.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WH.MOUSE_LL">
+            <summary>
+            Installs a hook procedure that monitors low-level mouse input events.
+            </summary>
+        </member>
+        <member name="T:Zeus.Helpers.User32Helper.WM">
+            <summary>
+            Window messages.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.NULL">
+            <summary>
+            Performs no operation.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.CREATE">
+            <summary>
+            Sent when an application requests that a window be created.
+            The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.DESTROY">
+            <summary>
+            Sent when a window is being destroyed.
+            It is sent to the window procedure of the window being destroyed after the window is removed from the screen.
+            This message is sent first to the window being destroyed and then to the child windows (if any) as they are destroyed.
+            During the processing of the message, it can be assumed that all child windows still exist.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MOVE">
+            <summary>
+            Sent after a window has been moved.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.SIZE">
+            <summary>
+            Sent to a window after its size has changed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.ENABLE">
+            <summary>
+            Sent when an application changes the enabled state of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.CLOSE">
+            <summary>
+            Sent as a signal that a window or an application should terminate.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.QUIT">
+            <summary>
+            Indicates a request to terminate an application.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.QUERYOPEN">
+            <summary>
+            Sent to an icon when the user requests that the window be restored to its previous size and position.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.SHOWWINDOW">
+            <summary>
+            Sent to a window when the window is about to be hidden or shown.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.ACTIVATEAPP">
+            <summary>
+            Sent when a window belonging to a different application than the active window is about to be activated.
+            The message is sent to the application whose window is being activated and to the application whose window is being deactivated.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.CANCELMODE">
+            <summary>
+            Sent to cancel certain modes, such as mouse capture. 
+            Certain functions also send this message explicitly to the specified window regardless of whether it is the active window. 
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.CHILDACTIVATE">
+            <summary>
+            Sent to a child window when the user clicks the window's title bar or when the window is activated, moved, or sized.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.GETMINMAXINFO">
+            <summary>
+            Sent to a window when the size or position of the window is about to change.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.QUERYDRAGICON">
+            <summary>
+            Sent to a minimized (iconic) window.
+            The window is about to be dragged by the user but does not have an icon defined for its class.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.COMPACTING">
+             <summary>
+            Sent to all top-level windows when the system detects more than 12.5 percent of system time over a 30- to 60-second interval is being spent compacting memory.
+            This indicates that system memory is low. 
+             </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.WINDOWPOSCHANGING">
+            <summary>
+            Sent to a window whose size, position, or place in the Z order is about to change.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.WINDOWPOSCHANGED">
+            <summary>
+            Sent to a window whose size, position, or place in the Z order has changed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.INPUTLANGCHANGEREQUEST">
+            <summary>
+            Posted to the window with the focus when the user chooses a new input language,
+            either with the hotkey (specified in the Keyboard control panel application) or from the indicator on the system taskbar.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.INPUTLANGCHANGE">
+            <summary>
+            Sent to the topmost affected window after an application's input language has been changed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.USERCHANGED">
+            <summary>
+            Sent to all windows after the user has logged on or off.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.STYLECHANGING">
+            <summary>
+            Sent to a window when one or more of the window's styles is about to change.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.STYLECHANGED">
+            <summary>
+            Sent to a window after one or more of the window's styles has changed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.GETICON">
+            <summary>
+            Sent to a window to retrieve a handle to the large or small icon associated with a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.NCCREATE">
+            <summary>
+            Sent prior to the <see cref="F:Zeus.Helpers.User32Helper.WM.CREATE"/> message when a window is first created.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.NCDESTROY">
+            <summary>
+            Notifies a window that its nonclient area is being destroyed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.NCCALCSIZE">
+            <summary>
+            Sent when the size and position of a window's client area must be calculated.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.NCACTIVATE">
+            <summary>
+            Sent to a window when its nonclient area needs to be changed to indicate an active or inactive state.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.KEYDOWN">
+            <summary>
+            Posted to the window with the keyboard focus when a nonsystem key is pressed.
+            A nonsystem key is a key that is pressed when the ALT key is not pressed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.KEYUP">
+            <summary>
+            Posted to the window with the keyboard focus when a nonsystem key is released.
+            A nonsystem key is a key that is pressed when the ALT key is not pressed,
+            or a keyboard key that is pressed when a window has the keyboard focus.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.SYSKEYDOWN">
+            <summary>
+            Posted to the window with the keyboard focus when the user presses the F10 key (which activates the menu bar)
+            or holds down the ALT key and then presses another key.
+            It also occurs when no window currently has the keyboard focus.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.SYSKEYUP">
+            <summary>
+            Posted to the window with the keyboard focus when the user releases a key that was pressed while the ALT key was held down.
+            It also occurs when no window currently has the keyboard focus.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MOUSEMOVE">
+            <summary>
+            Posted to a window when the cursor moves.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.LBUTTONDOWN">
+            <summary>
+            Posted when the user presses the left mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.LBUTTONUP">
+            <summary>
+            Posted when the user releases the left mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.LBUTTONDBLCLK">
+            <summary>
+            Posted when the user double-clicks the left mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.RBUTTONDOWN">
+            <summary>
+            Posted when the user presses the right mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.RBUTTONUP">
+            <summary>
+            Posted when the user releases the right mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.RBUTTONDBLCLK">
+            <summary>
+            Posted when the user double-clicks the right mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MBUTTONDOWN">
+            <summary>
+            Posted when the user presses the middle mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MBUTTONUP">
+            <summary>
+            Posted when the user releases the middle mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MBUTTONDBLCLK">
+            <summary>
+            Posted when the user double-clicks the middle mouse button while the cursor is in the client area of a window.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MOUSEWHEEL">
+            <summary>
+            Sent to the focus window when the mouse wheel is rotated.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MOUSEHWHEEL">
+            <summary>
+            Sent to the active window when the mouse's horizontal scroll wheel is tilted or rotated.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.SIZING">
+            <summary>
+            Sent to a window that the user is resizing.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.MOVING">
+            <summary>
+            Sent to a window that the user is moving.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.ENTERSIZEMOVE">
+            <summary>
+            Sent one time to a window after it enters the moving or sizing modal loop.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.EXITSIZEMOVE">
+            <summary>
+            Sent one time to a window, after it has exited the moving or sizing modal loop.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.DPICHANGED">
+            <summary>
+            Sent when the effective dots per inch (dpi) for a window has changed.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.HOTKEY">
+            <summary>
+            Posted when the user presses a hot key registered by the <see cref="!:User32Helper.RegisterHotKey(IntPtr, int, int, int)"/> function.
+            </summary>
+        </member>
+        <member name="F:Zeus.Helpers.User32Helper.WM.THEMECHANGED">
+            <summary>
+            Broadcast to every window following a theme change event.
+            </summary>
+        </member>
+    </members>
+</doc>

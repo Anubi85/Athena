@@ -1,0 +1,1 @@
+Change Settings dialog to modal and proper handle the changes discard
