@@ -42,15 +42,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="Zeus.Data">
       <HintPath>..\..\Zeus\Redist\Zeus.Data.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zeus.Log">
       <HintPath>..\..\Zeus\Redist\Zeus.Log.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zeus.Plugin">
       <HintPath>..\..\Zeus\Redist\Zeus.Plugin.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
